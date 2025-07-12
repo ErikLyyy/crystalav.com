@@ -7,6 +7,7 @@
 @import "import/contact.css";
 @import "import/list-product.css";
 @import "import/detail-product.css";
+@import "import/quote.css";
 
 /* Responsive */
 @import "import/responsive/home-responsive.css";
@@ -14,3 +15,4 @@
 @import "import/responsive/contact-responsive.css";
 @import "import/responsive/list-product-responsive.css";
 @import "import/responsive/detail-product-responsive.css";
+@import "import/responsive/quote-responsive.css";

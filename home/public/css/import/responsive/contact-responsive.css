@@ -1,6 +1,7 @@
-@media only screen and (max-width: 1440px) {
-}
+@media only screen and (max-width: 1440px) {}
+
 @media only screen and (max-width: 1024px) {
+
   #contact-form h2,
   #contact-info h2 {
     font-size: 20px;
@@ -16,10 +17,19 @@
     font-size: 14px;
   }
 }
+
 @media only screen and (max-width: 768px) {
+  #contact-wp {
+    flex-direction: column-reverse;
+  }
+
   #contact-form,
   #contact-info {
     width: 100%;
+  }
+
+  #contact-info {
+    margin-bottom: 0;
   }
 
   #contact-form span,
@@ -27,7 +37,7 @@
     text-align: center;
   }
 }
-@media only screen and (max-width: 576px) {
-}
-@media only screen and (max-width: 320px) {
-}
+
+@media only screen and (max-width: 576px) {}
+
+@media only screen and (max-width: 320px) {}

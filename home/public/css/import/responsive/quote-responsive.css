@@ -1,0 +1,65 @@
+@media only screen and (max-width: 1440px) {
+    .quote h2 {
+        font-size: 20px;
+    }
+
+    .quote ul.list-products li .product-thumb {
+        height: auto;
+    }
+
+    .quote ul.list-products li a.thumb-link img {
+        max-height: 105px;
+    }
+
+    .qty-wp button.delete svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .request a.request-btn {
+        padding: 7px 13px;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .request {
+        padding-left: 10px;
+    }
+
+    .request a.request-btn {
+        padding: 6px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #quote-wp {
+        flex-direction: column-reverse;
+    }
+
+    .quote {
+        width: 100%;
+    }
+
+    .quote h2 {
+        font-size: 16px;
+    }
+
+    .quote ul.list-products {
+        margin-top: 0px;
+    }
+
+    .request {
+        width: 100%;
+    }
+
+    .request a.request-btn {
+        display: block;
+        padding: 10px 15px;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 576px) {}
+
+@media only screen and (max-width: 320px) {}

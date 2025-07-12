@@ -1,0 +1,92 @@
+#quote-wp {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.quote {
+    width: 80%;
+    border: 1px solid #d4d4d4;
+    border-radius: 10px;
+}
+
+.quote h2 {
+    margin-bottom: 0;
+    padding: 15px 25px;
+}
+
+.quote h2 span {
+    color: brown;
+}
+
+.quote ul.list-products {
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.quote ul.list-products li {
+    width: 100%;
+    margin-bottom: 0;
+    border-top: 1px solid #d4d4d4;
+    overflow: hidden;
+}
+
+.quote ul.list-products li .product-wp {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.quote ul.list-products li .product-thumb {
+    width: 20%;
+}
+
+.quote ul.list-products li a.thumb-link {
+    padding: 0;
+}
+
+.quote ul.list-products li a.thumb-link img {
+    max-height: 140px;
+}
+
+.name-qty-wp {
+    width: 80%;
+    height: auto;
+    padding-left: 15px;
+}
+
+.quote ul.list-products li .product-name {
+    text-align: left;
+}
+
+.qty-wp {
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+.qty-wp button.delete:hover svg {
+    fill: #fff;
+}
+
+.request {
+    width: 20%;
+    padding-left: 30px;
+}
+
+.request a.request-btn {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #cf1047;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.request a.request-btn:hover {
+    text-decoration: underline;
+}

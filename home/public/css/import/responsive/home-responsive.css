@@ -112,6 +112,10 @@
     background-color: #e9ecef;
   }
 
+  ul#main-menu li>a.dropdown-toggle::after {
+    top: 10px;
+  }
+
   ul#main-menu.showed-menu ul.sub-menu {
     position: static;
     width: 100%;
