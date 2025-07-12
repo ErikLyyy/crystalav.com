@@ -50,7 +50,7 @@
     max-height: 140px;
 }
 
-.name-qty-wp {
+.quote .name-qty-wp {
     width: 80%;
     height: auto;
     padding-left: 15px;
@@ -60,12 +60,12 @@
     text-align: left;
 }
 
-.qty-wp {
+.quote .qty-wp {
     justify-content: flex-start;
     margin-bottom: 15px;
 }
 
-.qty-wp button.delete:hover svg {
+.quote .qty-wp button.delete:hover svg {
     fill: #fff;
 }
 

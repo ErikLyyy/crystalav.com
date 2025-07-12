@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home</title>
-  <link rel="icon" href="../public/images/logo-1.jpg" />
-  <link rel="stylesheet" href="../public/css/reset.css" />
-  <link rel="stylesheet" href="../public/css/style.css" />
+  <link rel="icon" href="public/images/logo-1.jpg" />
+  <link rel="stylesheet" href="public/css/reset.css" />
+  <link rel="stylesheet" href="public/css/style.css" />
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=keyboard_arrow_down" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -17,7 +17,7 @@
   <!-- HEADER  -->
   <div id="header">
     <div id="nav-wp">
-      <a href="/" id="logo"><img src="../public/images/logo.png" alt="Crystal Audio Visual Services, Inc."
+      <a href="?page=home" id="logo"><img src="public/images/logo.png" alt="Crystal Audio Visual Services, Inc."
           title="Crystal Audio Visual Services, Inc." /></a>
       <div id="menu-wp">
         <div id="info">
@@ -25,31 +25,31 @@
         </div>
         <div id="main-menu-wp">
           <ul id="main-menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="">Rental Request</a></li>
+            <li><a href="?page=home">Home</a></li>
+            <li><a href="?page=list-product">Rental Request</a></li>
             <li class="dropdown">
-              <a href="" class="dropdown-toggle">Services</a>
+              <a href="#" class="dropdown-toggle">Services</a>
               <ul class="sub-menu">
-                <li><a href="">Ambient, Theater Lighting</a></li>
-                <li><a href="">Audio Services</a></li>
-                <li><a href="">Staging</a></li>
-                <li><a href="">Video Display</a></li>
-                <li><a href="">Full Technical Support</a></li>
+                <li><a href="?page=cat_layout1">Ambient, Theater Lighting</a></li>
+                <li><a href="?page=cat_layout2">Audio Services</a></li>
+                <li><a href="?page=cat_layout3">Staging</a></li>
+                <li><a href="?page=cat_layout1">Video Display</a></li>
+                <li><a href="?page=full-technical-support">Full Technical Support</a></li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="" class="dropdown-toggle">Out Work</a>
+              <a href="#" class="dropdown-toggle">Out Work</a>
               <ul class="sub-menu">
-                <li><a href="">Conference & Meeting</a></li>
+                <li><a href="?page=cat_layout3">Conference & Meeting</a></li>
                 <li><a href="">Trade Shows</a></li>
-                <li><a href="">Fleetweek</a></li>
+                <li><a href="?page=cat_layout4">Fleetweek</a></li>
               </ul>
             </li>
-            <li><a href="">Contact Us</a></li>
+            <li><a href="?page=contact">Contact Us</a></li>
           </ul>
           <div id="toggle-menu-wp">
             <div id="cart">
-              <a href="">
+              <a href="?page=quote">
                 <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px"
                   fill="#6f6f6f">
                   <path
@@ -69,6 +69,3 @@
     </div>
   </div>
   <div id="head-blank"></div>
-</body>
-
-</html>
