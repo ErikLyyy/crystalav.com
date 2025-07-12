@@ -1,0 +1,44 @@
+@media only screen and (max-width: 1440px) {}
+
+@media only screen and (max-width: 1024px) {
+    .request-form {
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    .request-form span {
+        font-size: 14px;
+    }
+
+    .request-form button.request-btn {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 15px;
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    #quote-wp.request-pg {
+        flex-direction: column;
+    }
+
+    .request-form {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .request-form span {
+        font-size: 11px;
+    }
+
+    .request-form button.request-btn {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 576px) {}
+
+@media only screen and (max-width: 320px) {}
