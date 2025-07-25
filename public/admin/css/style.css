@@ -125,9 +125,9 @@ ul#sidebar-menu * {
     width: 300px;
 }
 
-.table tr td {
+/* .table tr td {
     vertical-align: middle;
-}
+} */
 
 .table-checkall input[type='checkbox'] {
     cursor: pointer;
@@ -145,4 +145,35 @@ ul#sidebar-menu * {
     top: -1px;
     right: -5px;
     color: #8c8c8c;
+}
+
+.btn_upload {
+    padding: 10px 0;
+}
+
+.btn_upload span {
+    padding: 10px 15px;
+    border: 1px solid #000;
+    background-color: #f0f0f0;
+}
+
+.btn_upload span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+
+}
+
+.action-wp {
+    display: flex;
+    justify-content: center;
+}
+
+.action {
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+}
+
+.action:hover svg {
+    fill: #0061f2;
 }
