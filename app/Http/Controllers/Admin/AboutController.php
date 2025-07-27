@@ -17,14 +17,32 @@ class AboutController extends Controller
     {
         $list_about = About::orderBy('id', 'desc')->get();
         $countItem = count($list_about);
-        $list_trash = About::onlyTrashed()->orderBy('id', 'desc')->get();
         $actions = ['delete' => 'Delete'];
         $trash = false;
-        if (isset($request->status)) {
-            if ($request->status == "trash") {
+        $list_trash = About::onlyTrashed()->orderBy('id', 'desc')->get();
+        $status = $request->input('status');
+        $search = $request->input('search');
+        $keywords = $search ? explode(' ', trim($search)) : [];
+
+        if ($search) {
+            $list_about = About::where(function ($query) use ($keywords) {
+                foreach ($keywords as $word) {
+                    $query->where('title', 'LIKE', "%{$word}%");
+                }
+            })->orderBy('id', 'desc')->get();
+        }
+        if ($status) {
+            if ($status == "trash") {
                 $list_about = $list_trash;
                 $trash = true;
                 $actions = ['restore' => "Restore", 'forceDelete' => "Delete"];
+                if ($search) {
+                    $list_about = About::onlyTrashed()->where(function ($query) use ($keywords) {
+                        foreach ($keywords as $word) {
+                            $query->where('title', 'LIKE', "%{$word}%");
+                        }
+                    })->orderBy('id', 'desc')->get();
+                }
             }
         }
 

@@ -29,8 +29,9 @@
                     <div class="analytic">
                         <a href="{{ url('admin/about') }}" class="text-primary">All<span
                                 class="text-muted">({{ $countItem }})</span></a>
-                        <a href="{{ request()->fullUrlWithQuery(['status' => 'trash']) }}" class="text-primary">Trash<span
-                                class="text-muted">({{ count($list_trash) }})</span></a>
+                        <a href="{{ url('admin/about?status=trash') }}" class="text-primary">
+                            Trash<span class="text-muted">({{ count($list_trash) }})</span>
+                        </a>
                     </div>
                     <div class="form-action form-inline py-3">
                         <select class="form-control mr-1" id="" name="actions">
@@ -52,6 +53,9 @@
                                 <th scope="col">Title</th>
                                 <th scope="col">Created by</th>
                                 <th scope="col">Created at</th>
+                                @if ($trash == true)
+                                    <th scope="col">Deleted at</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -117,6 +121,9 @@
                                         </div>
                                     <td>{{ $about->user->name }}</td>
                                     <td>{{ $about->created_at }}</td>
+                                    @if ($trash == true)
+                                        <td>{{ $about->deleted_at }}</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

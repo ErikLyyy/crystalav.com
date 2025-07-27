@@ -42,7 +42,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('reseller_store');
         Route::get('/edit/{id}', 'edit')->name('reseller_edit');
         Route::post('/update/{id}', 'update')->name('reseller_update');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('reseller_force_delete');
         Route::get('/delete/{id}', 'delete')->name('reseller_delete');
+        Route::get('/restore/{id}', 'restore')->name('reseller_restore');
+        Route::get('/action', 'handleAction')->name('reseller_action');
     });
     Route::controller(MenuController::class)->prefix('/menu')->group(function () {
         Route::get('/', 'show')->name('menu_show');
