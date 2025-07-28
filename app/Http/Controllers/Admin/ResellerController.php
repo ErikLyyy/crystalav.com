@@ -64,7 +64,6 @@ class ResellerController extends Controller
                     $k++;
                 }
             }
-            // dd($file);
             $file->move($upload_dir, $file_name);
 
             $reseller = Reseller::create([

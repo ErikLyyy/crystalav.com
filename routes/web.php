@@ -53,7 +53,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('menu_store');
         Route::get('/edit/{id}', 'edit')->name('menu_edit');
         Route::post('/update/{id}', 'update')->name('menu_update');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('menu_force_delete');
         Route::get('/delete/{id}', 'delete')->name('menu_delete');
+        Route::get('/restore/{id}', 'restore')->name('menu_restore');
+        Route::get('/action', 'handleAction')->name('menu_action');
     });
     Route::controller(CategoriesController::class)->prefix('/categories')->group(function () {
         Route::get('/', 'show')->name('categories_show');

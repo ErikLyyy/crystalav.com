@@ -74,7 +74,7 @@
                                     <td style="width: 300px">
                                         <div style="display:flex;flex-direction:column; justify-content:center">
                                             <div style="display: flex; justify-content: center; width: fit-content;"><img
-                                                    src="{{ $reseller->image ? url('public/' . $reseller->image->file_path) : url('public/media/images/default-image.webp') }}"
+                                                    src="{{ $reseller->image ? url('public/' . $reseller->image->file_path) : url('public/media/images/default-images/default-image.webp') }}"
                                                     alt="" style="width: 100%;max-height:80px"></div>
                                         </div>
                                     </td>
