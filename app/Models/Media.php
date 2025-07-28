@@ -21,7 +21,7 @@ class Media extends Model
         return $this->morphTo();
     }
 
-    function User()
+    function user()
     {
         return $this->belongsTo(User::class);
     }

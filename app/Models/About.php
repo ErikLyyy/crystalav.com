@@ -13,12 +13,11 @@ class About extends Model
     protected $fillable = [
         'title',
         'content',
-        'image_id',
         'user_id'
     ];
 
 
-    function User()
+    function user()
     {
         return $this->belongsTo(User::class);
     }

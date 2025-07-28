@@ -87,7 +87,7 @@
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
                             </div>
-                            Abou Us
+                            About Us
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
 

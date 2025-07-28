@@ -64,7 +64,10 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('categories_store');
         Route::get('/edit/{id}', 'edit')->name('categories_edit');
         Route::post('/update/{id}', 'update')->name('categories_update');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('categories_force_delete');
         Route::get('/delete/{id}', 'delete')->name('categories_delete');
+        Route::get('/restore/{id}', 'restore')->name('categories_restore');
+        Route::get('/action', 'handleAction')->name('categories_action');
     });
     Route::controller(SidebarController::class)->prefix('/sidebar')->group(function () {
         Route::get('/', 'show')->name('sidebar_show');

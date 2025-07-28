@@ -4,51 +4,55 @@
     <div id="content" class="container-fluid">
         <div class="card">
             <div class="card-header font-weight-bold">
-                Thêm bài viết
+                ADD NEW ABOUT
             </div>
+
+            @if (session('success'))
+                <div style="padding:10px 15px; margin-bottom:0px" class="alert alert-success">{{ session('success') }}</div>
+            @endif
             <div class="card-body">
-                <form>
+                <form action="{{ url('admin/categories/store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
-                        <label for="name">Tiêu đề bài viết</label>
-                        <input class="form-control" type="text" name="name" id="name">
+                        <label for="title">Title</label>
+                        <input class="form-control" type="text" name="title" id="title"
+                            value="{{ old('title') }}">
+                        @error('title')
+                            <small style="color:rgb(190, 50, 50)">{{ $message }}</small>
+                        @enderror
                     </div>
                     <div class="form-group">
-                        <label for="content">Nội dung bài viết</label>
-                        <textarea name="" class="form-control" id="content" cols="30" rows="5"></textarea>
+                        <label for="desc">Description</label>
+                        <textarea name="desc" class="form-control" id="desc" cols="30" rows="5">{{ old('desc') }}</textarea>
+                        @error('desc')
+                            <small style="color:rgb(190, 50, 50)">{{ $message }}</small>
+                        @enderror
                     </div>
-
-
                     <div class="form-group">
-                        <label for="">Danh mục</label>
-                        <select class="form-control" id="">
-                            <option>Chọn danh mục</option>
-                            <option>Danh mục 1</option>
-                            <option>Danh mục 2</option>
-                            <option>Danh mục 3</option>
-                            <option>Danh mục 4</option>
+                        <label for="image">Background</label>
+                        <div class="btn_upload">
+                            <span>Upload image</span>
+                        </div>
+                        <input type="file" name="image" id="image" style="display: none">
+                        <img src="" id="uploadedImage" style="display: none; margin:15px 0px">
+                        @error('image')
+                            <small style="color:rgb(190, 50, 50)">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <select name="menu_id" id="" class="form-control">
+                            <option>Select menu</option>
+                            @foreach ($list_menu as $menu)
+                                <option
+                                    value="{{ $menu->id }}"@if (old('menu_id') == $menu->id) selected="selected" @endif>
+                                    {{ $menu->title }}</option>
+                            @endforeach
                         </select>
+                        @error('menu_id')
+                            <small style="color:rgb(190, 50, 50)">{{ $message }}</small>
+                        @enderror
                     </div>
-                    <div class="form-group">
-                        <label for="">Trạng thái</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-                                value="option1" checked>
-                            <label class="form-check-label" for="exampleRadios1">
-                                Chờ duyệt
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                                value="option2">
-                            <label class="form-check-label" for="exampleRadios2">
-                                Công khai
-                            </label>
-                        </div>
-                    </div>
-
-
-
-                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                    <button type="submit" name="btn_submit" class="btn btn-primary">Add</button>
                 </form>
             </div>
         </div>

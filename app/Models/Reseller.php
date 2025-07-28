@@ -12,12 +12,11 @@ class Reseller extends Model
     use HasFactory, SoftDeletes, HasImage;
     protected $fillable = [
         'url',
-        'image_id',
         'user_id'
     ];
 
 
-    function User()
+    function user()
     {
         return $this->belongsTo(User::class);
     }

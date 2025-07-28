@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\HasImage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Menu extends Model
+class Category extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasImage;
     protected $fillable = [
         'title',
-        'description',
+        'menu_id',
+        'desc',
         'slug',
-        'layout',
-        'parent_id',
         'user_id'
     ];
 
@@ -23,8 +23,8 @@ class Menu extends Model
     {
         return $this->belongsTo(User::class);
     }
-    function categories()
+    function menu()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Menu::class)->withTrashed();
     }
 }
