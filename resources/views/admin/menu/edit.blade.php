@@ -22,7 +22,7 @@
     <div id="content" class="container-fluid">
         <div class="card">
             <div class="card-header font-weight-bold">
-                ADD NEW MENU
+                EDIT MENU
             </div>
 
             @if (session('success'))

@@ -70,7 +70,7 @@ class MenuController extends Controller
     }
     public function edit(Request $request, $id)
     {
-        $list_menu = Menu::where('parent_id', 0)->orderBy('id', 'asc')->get();
+        $list_menu = Menu::where('parent_id', 0)->where('id', 'not like', $id)->orderBy('id', 'asc')->get();
         $menu = Menu::withTrashed()->where('id', $id)->firstOrFail();
         return view('admin.menu.edit', compact('menu', 'list_menu'));
     }
