@@ -56,5 +56,73 @@ $(document).ready(function () {
     $('.btn_upload').click(function () {
         $(this).next('input').click();
     })
+
+    //add sidebar ajax event
+    $("#category").change(function () {
+        var category_id = $(this).val();
+        var subcategory = $("#subcategory").val();
+        var edit_value = $("#edit_value").val();        //get sidebar_id when edit
+        var data = {
+            category_id: category_id,
+            subcategory: subcategory,
+            edit_value: edit_value
+        };
+        $.ajax({
+            url: "../ajax",
+            method: 'GET',
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                //dump subcategory data by category
+                if (data['list_subcategory']) {
+                    var subSelect = $("#subcategory");
+                    subSelect.empty();
+                    subSelect.append('<option value="">Select parent subcategory</option>');
+                    if (data['subcategory'] == 0) {
+                        subSelect.append('<option value="0" selected>Set as parent subcategory</option>');
+                    } else {
+                        subSelect.append('<option value="0">Set as parent subcategory</option>');
+                    }
+                    data['list_subcategory'].forEach(function (item) {
+                        subSelect.append('<option value="' + item.id + '">' + item.title + '</option>');
+                    });
+                } else {
+                    return;
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr, ajaxOptions);
+                alert(thrownError);
+            }
+        })
+    })
+    $("#subcategory").change(function () {
+        var subcategory_id = $(this).val();
+        var category_id = $('#category').val()
+        var data = {
+            subcategory_id: subcategory_id
+        };
+        $.ajax({
+            url: "../ajax",
+            method: 'GET',
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+                //select subcategory, the main category of this subcategory will seclect
+                if (data) {
+                    $("#category").val(data.id);
+                } else {
+                    $("#category").val('');
+                }
+                if (subcategory_id == 0) {
+                    $("#category").val(category_id);
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr, ajaxOptions);
+                alert(thrownError);
+            }
+        })
+    })
 });
 

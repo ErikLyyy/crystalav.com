@@ -136,7 +136,7 @@
                         </ul>
                     </li>
                     <li class="nav-link">
-                        <a href="{{ url('admin/sidebar') }}">
+                        <a href="{{ url('admin/sidebar/show/subcategory') }}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
                             </div>
@@ -144,8 +144,10 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{ url('admin/sidebar') }}">List Sidebars</a></li>
-                            <li><a href="{{ url('admin/sidebar/add') }}">Add</a></li>
+                            <li><a href="{{ url('admin/sidebar/show/subcategory') }}">List Subcategory</a></li>
+                            <li><a href="{{ url('admin/sidebar/add/subcategory') }}">Add Subcategory</a></li>
+                            <li><a href="{{ url('admin/sidebar/show/filter') }}">List Filter</a></li>
+                            <li><a href="{{ url('admin/sidebar/add/filter') }}">Add Filter</a></li>
                         </ul>
                     </li>
                     <li class="nav-link">

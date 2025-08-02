@@ -11,7 +11,8 @@
                 <div style="padding:10px 15px; margin-bottom:0px" class="alert alert-success">{{ session('success') }}</div>
             @endif
             <div class="card-body">
-                <form action="{{ url('admin/sidebar/update/' . $sidebar->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('admin/sidebar/update/filter/' . $sidebar->id) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -24,10 +25,11 @@
                     <div class="form-group">
                         <select name="parent_id" id="" class="form-control">
                             <option>Select parent filter</option>
-                            <option value="0">Set as parent filter</option>
+                            <option value="0" @if ($sidebar->parent_id == 0) selected="selected" @endif>Set as
+                                parent filter</option>
                             @foreach ($list_filter as $item)
                                 <option
-                                    value="{{ $item->id }}"@if ($item->parent_id == $item->id) selected="selected" @endif>
+                                    value="{{ $item->id }}"@if ($sidebar->parent_id == $item->id) selected="selected" @endif>
                                     {{ $item->title }}</option>
                             @endforeach
                         </select>

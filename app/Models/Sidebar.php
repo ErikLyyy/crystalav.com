@@ -13,6 +13,7 @@ class Sidebar extends Model
         'title',
         'slug',
         'type',
+        'category_id',
         'parent_id',
         'user_id'
     ];
@@ -21,5 +22,9 @@ class Sidebar extends Model
     function user()
     {
         return $this->belongsTo(User::class);
+    }
+    function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }

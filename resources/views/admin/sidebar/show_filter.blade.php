@@ -4,10 +4,18 @@
     <div id="content" class="container-fluid">
         <div class="card">
             <div class="card-header font-weight-bold d-flex justify-content-between align-items-center">
-                <h5 class="m-0 ">List sidebars <a href="{{ url('admin/sidebar/add/subcategory') }}"
-                        class="btn btn-primary text-white ml-2">Add subcategory</a><a
-                        href="{{ url('admin/sidebar/add/filter') }}" class="btn btn-primary text-white ml-2">Add filter</a>
+                <h5 class="m-0 ">List Filter <a href="{{ url('admin/sidebar/add/filter') }}"
+                        class="btn btn-primary text-white ml-2">Add</a>
                 </h5>
+                <div class="form-search form-inline">
+                    <form method="GET">
+                        @if ($trash == true)
+                            <input type="hidden" name="status" value="trash" />
+                        @endif
+                        <input type="search" name="search" class="form-control form-search" placeholder="Search">
+                        <input type="submit" name="btn_search" value="Search" class="btn btn-primary">
+                    </form>
+                </div>
             </div>
             <div class="card-body">
                 @if (session('success'))
@@ -19,15 +27,9 @@
                 @endif
                 <form action="{{ url('admin/sidebar/action') }}" method="GET">
                     <div class="analytic">
-                        <a href="{{ url('admin/sidebar') }}" class="text-primary">All<span
+                        <a href="{{ url('admin/sidebar/show/filter') }}" class="text-primary">All<span
                                 class="text-muted">({{ $countItem }})</span></a>
-                        <a href="{{ url('admin/sidebar?status=subcategory') }}" class="text-primary">
-                            Subcategory<span class="text-muted">({{ count($list_subcategory) }})</span>
-                        </a>
-                        <a href="{{ url('admin/sidebar?status=filter') }}" class="text-primary">
-                            Filter<span class="text-muted">({{ count($list_filter) }})</span>
-                        </a>
-                        <a href="{{ url('admin/sidebar?status=trash') }}" class="text-primary">
+                        <a href="{{ url('admin/sidebar/show/filter?status=trash') }}" class="text-primary">
                             Trash<span class="text-muted">({{ count($list_trash) }})</span>
                         </a>
                     </div>
@@ -48,7 +50,6 @@
                                 </th>
                                 <th scope="col">#</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Sidebar type</th>
                                 <th scope="col">Created by</th>
                                 <th scope="col">Created at</th>
                                 @if ($trash == true)
@@ -115,7 +116,6 @@
                                                 </a>
                                             @endif
                                         </div>
-                                    <td>{{ $sidebar->type }}</td>
                                     <td>{{ $sidebar->user->name }}</td>
                                     <td>{{ $sidebar->created_at }}</td>
                                     @if ($trash == true)

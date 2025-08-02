@@ -27,4 +27,8 @@ class Category extends Model
     {
         return $this->belongsTo(Menu::class)->withTrashed();
     }
+    public function sidebar()
+    {
+        return $this->hasMany(Sidebar::class, 'category_id');
+    }
 }

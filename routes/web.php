@@ -70,15 +70,16 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::get('/action', 'handleAction')->name('categories_action');
     });
     Route::controller(SidebarController::class)->prefix('/sidebar')->group(function () {
-        Route::get('/', 'show')->name('sidebar_show');
+        Route::get('/show/{type}', 'show')->name('sidebar_show');
         Route::get('/add/{type}', 'add')->name('sidebar_add');
         Route::post('/store/{type}', 'store')->name('sidebar_store');
         Route::get('/edit/{id}', 'edit')->name('sidebar_edit');
-        Route::post('/update/{id}', 'update')->name('sidebar_update');
+        Route::post('/update/{type}/{id}', 'update')->name('sidebar_update');
         Route::get('/forceDelete/{id}', 'forceDelete')->name('sidebar_force_delete');
         Route::get('/delete/{id}', 'delete')->name('sidebar_delete');
         Route::get('/restore/{id}', 'restore')->name('sidebar_restore');
         Route::get('/action', 'handleAction')->name('sidebar_action');
+        Route::get('/ajax', 'ajax')->name('sidebar_ajax');
     });
     Route::controller(ProductController::class)->prefix('/product')->group(function () {
         Route::get('/', 'show')->name('product_show');
