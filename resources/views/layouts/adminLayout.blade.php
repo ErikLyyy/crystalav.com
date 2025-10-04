@@ -34,10 +34,10 @@
                 <div class="btn-group">
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
-                        Admin
+                        {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{{ url('admin/user/edit', Auth::id()) }}">Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                                                              document.getElementById('logout-form').submit();">
@@ -190,8 +190,7 @@
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
                             <li><a href="{{ url('admin/role') }}">List Roles</a></li>
-                            <li><a href="{{ url('admin/role/add') }}">Add Role</a></li>
-                            <li><a href="{{ url('admin/permission') }}">List Permissions</a></li>
+                            <li><a href="{{ url('admin/role/add') }}">Add</a></li>
                         </ul>
                     </li>
 

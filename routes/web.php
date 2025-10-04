@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RequestController;
 use App\Http\Controllers\Admin\ResellerController;
@@ -13,10 +12,6 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SidebarController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -118,6 +113,9 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('user.edit');
         Route::post('/update/{id}', 'update')->name('user.update');
         Route::get('/delete/{id}', 'delete')->name('user.delete');
+        Route::get('/action', 'handleAction')->name('user.action');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('user.forceDelete');
+        Route::get('/restore/{id}', 'restore')->name('user.restore');
     });
     Route::controller(RoleController::class)->prefix('/role')->group(function () {
         Route::get('/', 'show')->name('role.show');
@@ -126,13 +124,6 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('role.edit');
         Route::post('/update/{id}', 'update')->name('role.update');
         Route::get('/delete/{id}', 'delete')->name('role.delete');
-    });
-    Route::controller(PermissionController::class)->prefix('/permission')->group(function () {
-        Route::get('/', 'show')->name('permission.show');
-        Route::get('/add', 'add')->name('permission.add');
-        Route::post('/store', 'store')->name('permission.store');
-        Route::get('/edit/{id}', 'edit')->name('permission.edit');
-        Route::post('/update/{id}', 'update')->name('permission.update');
-        Route::get('/delete/{id}', 'delete')->name('permission.delete');
+        Route::get('/action', 'handleAction')->name('role.action');
     });
 });
