@@ -49,14 +49,18 @@ class CategoriesController extends Controller
                 }
             }
         }
+        $menu_title = [];
         foreach ($list_categories as $category) {
-            if ($category->menu->parent_id != 0) {
-                $parent_menu = Menu::find($category->menu->parent_id);
-                $category->menu->title = $parent_menu->title . " / " . $category->menu->title;
+            if (isset($category->menu->parent_id)) {
+                if ($category->menu->parent_id != 0) {
+                    $menu_title[$category->id] = $category->menu->title;
+                }
+            } else {
+                $menu_title[$category->id] = "None";
             }
         }
 
-        return view('admin.categories.show', compact('list_categories', 'list_trash', 'actions', 'countItem', 'trash'));
+        return view('admin.categories.show', compact('list_categories', 'list_trash', 'actions', 'countItem', 'trash', 'menu_title'));
     }
     public function add()
     {

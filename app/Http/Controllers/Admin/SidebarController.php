@@ -203,6 +203,10 @@ class SidebarController extends Controller
             'slug' => Str::slug($request->input('title')),
             'user_id' => Auth::id(),
         ]);
+        $children_sidebar = Sidebar::withTrashed()->where('parent_id', $id)->update([
+            'category_id' => $request->input('category_id'),
+
+        ]);
         return redirect('admin/sidebar/show/' . $type)->with('success', 'Edited successfully!');
 
     }

@@ -27,8 +27,12 @@ class Category extends Model
     {
         return $this->belongsTo(Menu::class)->withTrashed();
     }
-    public function sidebar()
+    public function sidebars()
     {
         return $this->hasMany(Sidebar::class, 'category_id');
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id');
     }
 }

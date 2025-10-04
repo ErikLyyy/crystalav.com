@@ -122,7 +122,7 @@
                                             @endif
                                         </div>
                                     <td>{{ $category->desc }}</td>
-                                    <td>{{ $category->menu->title }}</td>
+                                    <td>{{ $menu_title[$category->id] }}</td>
                                     <td>{{ $category->user->name }}</td>
                                     <td>{{ $category->created_at }}</td>
                                     @if ($trash == true)

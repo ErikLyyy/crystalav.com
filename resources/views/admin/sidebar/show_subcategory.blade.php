@@ -118,7 +118,8 @@
                                             @endif
                                         </div>
                                         @if ($sidebar->category)
-                                    <td>{{ $sidebar->category->menu->title . ' / ' . $sidebar->category->title }}</td>
+                                    <td>{{ (isset($sidebar->category->menu->title) ? $sidebar->category->menu->title : 'None') . ' / ' . $sidebar->category->title }}
+                                    </td>
                                 @else
                                     <td>None</td>
                             @endif

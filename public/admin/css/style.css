@@ -177,3 +177,79 @@ ul#sidebar-menu * {
 .action:hover svg {
     fill: #0061f2;
 }
+
+/* upload multiple media  */
+.preview-block {
+    position: relative;
+    display: inline-block;
+    margin: 5px;
+    vertical-align: top;
+    height: 150px;
+}
+
+.preview-block img,
+.preview-block video {
+    height: 150px;
+    width: auto;
+    display: block;
+}
+
+.loading-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+.spinner {
+    border: 4px solid #ccc;
+    border-top: 4px solid #4caf50;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 10;
+    padding: 0;
+}
+
+.progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 5px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #4caf50;
+}
+
+.subcategory_title {
+    display: none;
+}
