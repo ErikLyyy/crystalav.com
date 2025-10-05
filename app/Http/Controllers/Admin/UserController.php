@@ -17,9 +17,9 @@ class UserController extends Controller
 {
     function show(Request $request)
     {
-        // if (!Gate::allows('user.show')) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('user.show')) {
+            abort(403);
+        }
         Paginator::useBootstrapFive();
         $currentPage = 1;
         if ($request->page) {
@@ -61,17 +61,17 @@ class UserController extends Controller
     }
     function add()
     {
-        // if (!Gate::allows('user.add')) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('user.add')) {
+            abort(403);
+        }
         $roles = Role::all();
         return view('admin.user.add', compact('roles'));
     }
     function store(Request $request)
     {
-        // if (!Gate::allows('user.add')) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('user.add')) {
+            abort(403);
+        }
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
@@ -88,18 +88,18 @@ class UserController extends Controller
     }
     function edit($id)
     {
-        // if (!Gate::allows('user.edit')) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('user.edit')) {
+            abort(403);
+        }
         $user = User::find($id);
         $roles = Role::all();
         return view('admin.user.edit', compact('user', 'roles'));
     }
     function update(Request $request, $id)
     {
-        // if (!Gate::allows('user.edit')) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('user.edit')) {
+            abort(403);
+        }
         if ($request->password == "") {
             $request->validate(
                 [
@@ -127,9 +127,9 @@ class UserController extends Controller
     }
     function delete(Request $request, $id)
     {
-        // if (!Gate::allows('user.delete')) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('user.delete')) {
+            abort(403);
+        }
         if (Auth::id() == $id) {
             return redirect('admin/user')->with('danger', "You can't delete this user!");
         } elseif ($id == 2) {
@@ -141,9 +141,9 @@ class UserController extends Controller
     }
     function handleAction(Request $request)
     {
-        // if (!Gate::allows('user.delete')) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('user.delete')) {
+            abort(403);
+        }
         if (!isset($request->checkItem)) {
             return redirect('admin/user')->with('danger', 'You have not selected anything yet');
         }
@@ -177,6 +177,9 @@ class UserController extends Controller
     }
     function forceDelete($id)
     {
+        if (!Gate::allows('user.delete')) {
+            abort(403);
+        }
         $user_role = User_role::where('user_id', $id)->get();
         foreach ($user_role as $v) {
             $v->delete();
@@ -187,11 +190,18 @@ class UserController extends Controller
     }
     function restore($id)
     {
-        // if (!Gate::allows('user.delete')) {
-        //     abort(403);
-        // }
+        if (!Gate::allows('user.delete')) {
+            abort(403);
+        }
         User::onlyTrashed()->where('id', $id)->restore();
         return redirect('admin/user')->with('status', 'Restored successfully!');
+    }
+    function profile()
+    {
+
+        $user = Auth::user();
+
+        return view('admin.user.profile', compact('user'));
     }
 }
 

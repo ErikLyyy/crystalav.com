@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Media;
 use App\Models\Menu;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class CategoriesController extends Controller
@@ -19,6 +20,9 @@ class CategoriesController extends Controller
     use DataTree;
     public function show(Request $request)
     {
+        if (!Gate::allows('category.show')) {
+            abort(403);
+        }
         $list_categories = Category::orderBy('id', 'desc')->get();
         $countItem = count($list_categories);
         $actions = ['delete' => 'Delete'];
@@ -64,6 +68,9 @@ class CategoriesController extends Controller
     }
     public function add()
     {
+        if (!Gate::allows('category.add')) {
+            abort(403);
+        }
         $list_menu = $this->data_tree(Menu::withTrashed()->get());
         foreach ($list_menu as $menu) {
             if ($menu->parent_id != 0) {
@@ -74,6 +81,9 @@ class CategoriesController extends Controller
     }
     public function store(Request $request)
     {
+        if (!Gate::allows('category.add')) {
+            abort(403);
+        }
         $request->validate(
             [
                 'title' => ['required', 'string', 'max:255'],
@@ -116,6 +126,9 @@ class CategoriesController extends Controller
     }
     public function edit(Request $request, $id)
     {
+        if (!Gate::allows('category.edit')) {
+            abort(403);
+        }
         $list_menu = $this->data_tree(Menu::withTrashed()->get());
         foreach ($list_menu as $menu) {
             if ($menu->parent_id != 0) {
@@ -127,6 +140,9 @@ class CategoriesController extends Controller
     }
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('category.edit')) {
+            abort(403);
+        }
         $category = Category::withTrashed()->where('id', $id)->firstOrFail();
         $request->validate(
             [
@@ -172,6 +188,9 @@ class CategoriesController extends Controller
     }
     public function delete($id)
     {
+        if (!Gate::allows('category.delete')) {
+            abort(403);
+        }
         $category = Category::find($id);
         $category->delete();
         return redirect()->back()->with('success', 'Deleted successfully!');
@@ -179,6 +198,9 @@ class CategoriesController extends Controller
     }
     public function forceDelete($id)
     {
+        if (!Gate::allows('category.delete')) {
+            abort(403);
+        }
         $category = Category::onlyTrashed()->where('id', $id)->firstOrFail();
         $category->forceDelete();
         return redirect()->back()->with('success', 'Deleted successfully!');
@@ -186,6 +208,9 @@ class CategoriesController extends Controller
     }
     public function restore($id)
     {
+        if (!Gate::allows('category.delete')) {
+            abort(403);
+        }
         $category = Category::onlyTrashed()->where('id', $id)->firstOrFail();
         $category->restore();
         return redirect()->back()->with('success', 'Restored successfully!');
@@ -193,6 +218,9 @@ class CategoriesController extends Controller
     }
     public function handleAction(Request $request)
     {
+        if (!Gate::allows('category.delete')) {
+            abort(403);
+        }
         if ($request->has('btn_apply')) {
             $checkItem = $request->input('checkItem');
             $action = $request->input('actions');

@@ -47,19 +47,21 @@
                             {{ $message }}
                         </small>
                     @enderror
-                    <div class="form-group">
+                    @if (Auth::id() != $user->id && $user->id != 2)
+                        <div class="form-group">
 
-                        <label for="">Select Role</label>
-                        <select class="form-control" id="" name="role[]" multiple style="width: 500px">
-                            @foreach ($roles as $role)
-                                <option
-                                    @foreach ($user->roles as $item)
+                            <label for="">Select Role</label>
+                            <select class="form-control" id="" name="role[]" multiple style="width: 500px">
+                                @foreach ($roles as $role)
+                                    <option
+                                        @foreach ($user->roles as $item)
                                         @if ($item->id == $role->id)
                                             @selected(true) @endif @endforeach
-                                    value="{{ $role->id }}">{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                                        value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
 
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>

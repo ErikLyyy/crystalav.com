@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\Sidebar;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,9 @@ class SidebarController extends Controller
     use HasChild, DataTree;
     public function show(Request $request, $type)
     {
+        if (!Gate::allows('sidebar.show')) {
+            abort(403);
+        }
         $search = $request->input('search');
         $keywords = $search ? explode(' ', trim($search)) : [];
 
@@ -73,6 +77,9 @@ class SidebarController extends Controller
     }
     public function add($type)
     {
+        if (!Gate::allows('sidebar.add')) {
+            abort(403);
+        }
         $list_categories = Category::withTrashed()->get();
         $list_subcategories = Sidebar::withTrashed()->where('parent_id', 0)->where('type', 'subcategory')->orderBy('id', 'asc')->get();
         $list_filter = Sidebar::withTrashed()->where('parent_id', 0)->where('type', 'filter')->orderBy('id', 'asc')->get();
@@ -80,6 +87,9 @@ class SidebarController extends Controller
     }
     public function store(Request $request, $type)
     {
+        if (!Gate::allows('sidebar.add')) {
+            abort(403);
+        }
         if ($type == "subcategory") {
             $rules = [
                 'title' => ['required', 'string', 'max:255'],
@@ -147,6 +157,9 @@ class SidebarController extends Controller
     }
     public function edit(Request $request, $id)
     {
+        if (!Gate::allows('sidebar.edit')) {
+            abort(403);
+        }
         $list_categories = Category::withTrashed()->get();
         $list_filter = Sidebar::where('parent_id', 0)->where('type', 'filter')->where('id', 'not like', $id)->orderBy('id', 'asc')->get();
         $sidebar = Sidebar::withTrashed()->where('id', $id)->firstOrFail();
@@ -166,6 +179,9 @@ class SidebarController extends Controller
     }
     public function update(Request $request, $type, $id)
     {
+        if (!Gate::allows('sidebar.edit')) {
+            abort(403);
+        }
         $sidebar = Sidebar::withTrashed()->where('id', $id)->firstOrFail();
         if ($type == "subcategory") {
             $request->validate(
@@ -212,6 +228,9 @@ class SidebarController extends Controller
     }
     public function delete($id)
     {
+        if (!Gate::allows('sidebar.delete')) {
+            abort(403);
+        }
         // When delete parent sidebar, the children will be delete too
         Sidebar::where('parent_id', $id)->delete();
         $sidebar = Sidebar::find($id);
@@ -221,6 +240,9 @@ class SidebarController extends Controller
     }
     public function forceDelete($id)
     {
+        if (!Gate::allows('sidebar.delete')) {
+            abort(403);
+        }
         Sidebar::onlyTrashed()->where('parent_id', $id)->forceDelete();
         $sidebar = Sidebar::onlyTrashed()->where('id', $id)->firstOrFail();
         $sidebar->forceDelete();
@@ -229,6 +251,9 @@ class SidebarController extends Controller
     }
     public function restore($id)
     {
+        if (!Gate::allows('sidebar.delete')) {
+            abort(403);
+        }
         // When restore child sidebar, the parent will be restore too
         $sidebar = Sidebar::onlyTrashed()->where('id', $id)->firstOrFail();
         Sidebar::onlyTrashed()->where('id', $sidebar->parent_id)->restore();
@@ -238,6 +263,9 @@ class SidebarController extends Controller
     }
     public function handleAction(Request $request)
     {
+        if (!Gate::allows('sidebar.delete')) {
+            abort(403);
+        }
         if ($request->has('btn_apply')) {
             $checkItem = $request->input('checkItem');
             $action = $request->input('actions');

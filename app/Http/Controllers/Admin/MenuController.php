@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 use App\Models\Menu;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class MenuController extends Controller
@@ -17,6 +18,9 @@ class MenuController extends Controller
     use HasChild, DataTree;
     public function show(Request $request)
     {
+        if (!Gate::allows('menu.show')) {
+            abort(403);
+        }
         $list_menu = Menu::orderBy('id', 'asc')->get();
         $list_menu = $this->data_tree($list_menu);
         $countItem = count($list_menu);
@@ -41,11 +45,17 @@ class MenuController extends Controller
     }
     public function add()
     {
+        if (!Gate::allows('menu.add')) {
+            abort(403);
+        }
         $list_menu = Menu::where('parent_id', 0)->orderBy('id', 'asc')->get();
         return view('admin.menu.add', compact('list_menu'));
     }
     public function store(Request $request)
     {
+        if (!Gate::allows('menu.add')) {
+            abort(403);
+        }
         $request->validate(
             [
                 'title' => ['required', 'string', 'max:255'],
@@ -70,12 +80,18 @@ class MenuController extends Controller
     }
     public function edit(Request $request, $id)
     {
+        if (!Gate::allows('menu.edit')) {
+            abort(403);
+        }
         $list_menu = Menu::where('parent_id', 0)->where('id', 'not like', $id)->orderBy('id', 'asc')->get();
         $menu = Menu::withTrashed()->where('id', $id)->firstOrFail();
         return view('admin.menu.edit', compact('menu', 'list_menu'));
     }
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('menu.edit')) {
+            abort(403);
+        }
         $menu = Menu::withTrashed()->where('id', $id)->firstOrFail();
         $request->validate(
             [
@@ -100,6 +116,9 @@ class MenuController extends Controller
     }
     public function delete($id)
     {
+        if (!Gate::allows('menu.delete')) {
+            abort(403);
+        }
         // When delete parent menu, the children will be delete too
         Menu::where('parent_id', $id)->delete();
         $menu = Menu::find($id);
@@ -109,6 +128,9 @@ class MenuController extends Controller
     }
     public function forceDelete($id)
     {
+        if (!Gate::allows('menu.delete')) {
+            abort(403);
+        }
         Menu::onlyTrashed()->where('parent_id', $id)->forceDelete();
         $menu = Menu::onlyTrashed()->where('id', $id)->firstOrFail();
         $menu->forceDelete();
@@ -117,6 +139,9 @@ class MenuController extends Controller
     }
     public function restore($id)
     {
+        if (!Gate::allows('menu.delete')) {
+            abort(403);
+        }
         // When restore child menu, the parent will be restore too
         $menu = Menu::onlyTrashed()->where('id', $id)->firstOrFail();
         Menu::onlyTrashed()->where('id', $menu->parent_id)->restore();
@@ -126,6 +151,9 @@ class MenuController extends Controller
     }
     public function handleAction(Request $request)
     {
+        if (!Gate::allows('menu.delete')) {
+            abort(403);
+        }
         if ($request->has('btn_apply')) {
             $checkItem = $request->input('checkItem');
             $action = $request->input('actions');

@@ -10,30 +10,26 @@ use Illuminate\Http\Request;
 
 use App\Models\Reseller;
 use App\Models\Media;
+use Illuminate\Support\Facades\Gate;
 
 class ResellerController extends Controller
 {
     public function show(Request $request)
     {
+        if (!Gate::allows('reseller.show')) {
+            abort(403);
+        }
         $list_reseller = Reseller::orderBy('id', 'desc')->get();
         $countItem = count($list_reseller);
         $actions = ['delete' => 'Delete'];
         $trash = false;
         $list_trash = Reseller::onlyTrashed()->orderBy('id', 'desc')->get();
         $status = $request->input('status');
-        $search = $request->input('search');
-
-        if ($search) {
-            $list_reseller = Reseller::where('url', 'like', "%{$search}%")->orderBy('id', 'desc')->get();
-        }
         if ($status) {
             if ($status == "trash") {
                 $list_reseller = $list_trash;
                 $trash = true;
                 $actions = ['restore' => "Restore", 'forceDelete' => "Delete"];
-                if ($search) {
-                    $list_reseller = Reseller::onlyTrashed()->where('url', 'like', "%{$search}%")->orderBy('id', 'desc')->get();
-                }
             }
         }
 
@@ -41,10 +37,16 @@ class ResellerController extends Controller
     }
     public function add()
     {
+        if (!Gate::allows('reseller.add')) {
+            abort(403);
+        }
         return view('admin.reseller.add');
     }
     public function store(Request $request)
     {
+        if (!Gate::allows('reseller.add')) {
+            abort(403);
+        }
         $request->validate(
             [
                 'url' => ['required', 'string', 'max:255'],
@@ -81,11 +83,17 @@ class ResellerController extends Controller
     }
     public function edit(Request $request, $id)
     {
+        if (!Gate::allows('reseller.edit')) {
+            abort(403);
+        }
         $reseller = Reseller::withTrashed()->where('id', $id)->firstOrFail();
         return view('admin.reseller.edit', compact('reseller'));
     }
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('reseller.edit')) {
+            abort(403);
+        }
         $reseller = Reseller::withTrashed()->where('id', $id)->firstOrFail();
         $request->validate(
             [
@@ -125,6 +133,9 @@ class ResellerController extends Controller
     }
     public function delete($id)
     {
+        if (!Gate::allows('reseller.delete')) {
+            abort(403);
+        }
         $reseller = Reseller::find($id);
         $reseller->delete();
         return redirect()->back()->with('success', 'Deleted successfully!');
@@ -132,6 +143,9 @@ class ResellerController extends Controller
     }
     public function forceDelete($id)
     {
+        if (!Gate::allows('reseller.delete')) {
+            abort(403);
+        }
         $reseller = Reseller::onlyTrashed()->where('id', $id)->firstOrFail();
         $reseller->forceDelete();
         return redirect()->back()->with('success', 'Deleted successfully!');
@@ -139,6 +153,9 @@ class ResellerController extends Controller
     }
     public function restore($id)
     {
+        if (!Gate::allows('reseller.delete')) {
+            abort(403);
+        }
         $reseller = Reseller::onlyTrashed()->where('id', $id)->firstOrFail();
         $reseller->restore();
         return redirect()->back()->with('success', 'Restored successfully!');
@@ -146,6 +163,9 @@ class ResellerController extends Controller
     }
     public function handleAction(Request $request)
     {
+        if (!Gate::allows('reseller.delete')) {
+            abort(403);
+        }
         if ($request->has('btn_apply')) {
             $checkItem = $request->input('checkItem');
             $action = $request->input('actions');

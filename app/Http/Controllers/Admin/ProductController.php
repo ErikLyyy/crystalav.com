@@ -13,6 +13,7 @@ use App\Traits\HasChild;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -27,6 +28,9 @@ class ProductController extends Controller
     }
     public function show(Request $request)
     {
+        if (!Gate::allows('product.show')) {
+            abort(403);
+        }
         //delete storage when the user go in this page
         $files = Storage::disk('public')->files('tmp');
         foreach ($files as $file) {
@@ -82,6 +86,9 @@ class ProductController extends Controller
     }
     public function add()
     {
+        if (!Gate::allows('product.add')) {
+            abort(403);
+        }
         $list_categories = Category::withTrashed()->orderBy('id', 'desc')->get();
         $list_subcategories = $this->data_tree(Sidebar::withTrashed()->where('type', 'subcategory')->orderBy('id', 'asc')->get());
         $list_filter = $this->data_tree(Sidebar::withTrashed()->where('type', 'filter')->orderBy('id', 'asc')->get());
@@ -89,6 +96,9 @@ class ProductController extends Controller
     }
     public function store(Request $request)
     {
+        if (!Gate::allows('product.add')) {
+            abort(403);
+        }
         $request->validate(
             [
                 'name' => ['required', 'string', 'max:255'],
@@ -184,6 +194,9 @@ class ProductController extends Controller
     }
     public function edit(Request $request, $id)
     {
+        if (!Gate::allows('product.edit')) {
+            abort(403);
+        }
         $list_categories = Category::withTrashed()->orderBy('id', 'desc')->get();
         $list_subcategories = $this->data_tree(Sidebar::withTrashed()->where('type', 'subcategory')->orderBy('id', 'asc')->get());
         $list_filter = $this->data_tree(Sidebar::withTrashed()->where('type', 'filter')->orderBy('id', 'asc')->get());
@@ -214,6 +227,9 @@ class ProductController extends Controller
     }
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('product.edit')) {
+            abort(403);
+        }
         $product = Product::withTrashed()->where('id', $id)->firstOrFail();
         $request->validate(
             [
@@ -334,11 +350,17 @@ class ProductController extends Controller
     }
     public function delete($id)
     {
+        if (!Gate::allows('product.delete')) {
+            abort(403);
+        }
         Product::find($id)->delete();
         return redirect()->back()->with('success', 'Deleted successfully!');
     }
     public function forceDelete($id)
     {
+        if (!Gate::allows('product.delete')) {
+            abort(403);
+        }
         $product = Product::onlyTrashed()->find($id);
         $product->media()->delete();
         $product->forceDelete();
@@ -346,11 +368,17 @@ class ProductController extends Controller
     }
     public function restore($id)
     {
+        if (!Gate::allows('product.delete')) {
+            abort(403);
+        }
         Product::onlyTrashed()->find($id)->restore();
         return redirect()->back()->with('success', 'Restored successfully!');
     }
     public function handleAction(Request $request)
     {
+        if (!Gate::allows('product.delete')) {
+            abort(403);
+        }
         if ($request->has('btn_apply')) {
             $checkItem = $request->input('checkItem');
             $action = $request->input('actions');
@@ -437,6 +465,9 @@ class ProductController extends Controller
 
     public function keysearchShow()
     {
+        if (!Gate::allows('keysearch.show')) {
+            abort(403);
+        }
         $list_keysearches = Keysearch::all();
         foreach ($list_keysearches as $keysearch) {
             $keysearch->result = count($keysearch->products);
@@ -445,11 +476,17 @@ class ProductController extends Controller
     }
     public function keysearchDelete($id)
     {
+        if (!Gate::allows('keysearch.delete')) {
+            abort(403);
+        }
         Keysearch::find($id)->delete();
         return redirect()->back()->with('success', 'Deleted successfully!');
     }
     public function keysearchActions(Request $request)
     {
+        if (!Gate::allows('keysearch.delete')) {
+            abort(403);
+        }
         $checkItems = $request->input('checkItem');
         foreach ($checkItems as $item) {
             Keysearch::where('id', $item)->delete();

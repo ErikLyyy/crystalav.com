@@ -37,7 +37,7 @@
                         {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="{{ url('admin/user/edit', Auth::id()) }}">Profile</a>
+                        <a class="dropdown-item" href="{{ url('admin/user/profile') }}">Profile</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                                                              document.getElementById('logout-form').submit();">
@@ -55,7 +55,7 @@
         <div id="page-body" class="d-flex">
             <div id="sidebar" class="bg-white">
                 <ul id="sidebar-menu">
-                    <li class="nav-link">
+                    <li class="nav-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}">
                         <a href="{{ url('admin/dashboard') }}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
@@ -63,137 +63,197 @@
                             Dashboard
                         </a>
                     </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/contact') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Contact
-                        </a>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/request') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Request
-                        </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/request') }}">List Requests</a></li>
-                            <li><a href="{{ url('admin/request/add') }}">Add</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/about') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            About Us
-                        </a>
-                        <i class="arrow fas fa-angle-right"></i>
+                    @can('contact.show')
+                        <li class="nav-link {{ request()->is('admin/contact*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/contact') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Contact
+                            </a>
+                        </li>
+                    @endcan
+                    @can('request.show')
+                        <li class="nav-link {{ request()->is('admin/request*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/request') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Request
+                            </a>
+                        </li>
+                    @endcan
+                    @can('about-us.show')
+                        <li class="nav-link {{ request()->is('admin/about*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/about') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                About Us
+                            </a>
+                            <i class="arrow fas fa-angle-right"></i>
 
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/about') }}">List About</a></li>
-                            <li><a href="{{ url('admin/about/add') }}">Add</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/reseller') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Reseller
-                        </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/reseller') }}">List Resellers</a></li>
-                            <li><a href="{{ url('admin/reseller/add') }}">Add</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/menu') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Menu
-                        </a>
-                        <i class="arrow fas fa-angle-down"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/menu') }}">List Menu</a></li>
-                            <li><a href="{{ url('admin/menu/add') }}">Add</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/categories') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Category
-                        </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/categories') }}">List Categories</a></li>
-                            <li><a href="{{ url('admin/categories/add') }}">Add</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/sidebar/show/subcategory') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Sidebar
-                        </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/sidebar/show/subcategory') }}">List Subcategory</a></li>
-                            <li><a href="{{ url('admin/sidebar/add/subcategory') }}">Add Subcategory</a></li>
-                            <li><a href="{{ url('admin/sidebar/show/filter') }}">List Filter</a></li>
-                            <li><a href="{{ url('admin/sidebar/add/filter') }}">Add Filter</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/product') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Product
-                        </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/product') }}">List Products</a></li>
-                            <li><a href="{{ url('admin/product/add') }}">Add</a></li>
-                            <li><a href="{{ url('admin/product/keysearch') }}">Keysearches</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-link">
-                        <a href="{{ url('admin/user') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Users
-                        </a>
-                        <i class="arrow fas fa-angle-right"></i>
+                            <ul class="sub-menu">
+                                <li class="{{ request()->is('admin/about') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/about') }}">List About</a></li>
+                                @can('about-us.add')
+                                    <li class="{{ request()->is('admin/about/add*') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/about/add') }}">Add</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('reseller.show')
 
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/user') }}">List Users</a></li>
-                            <li><a href="{{ url('admin/user/add') }}">Add</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-link active">
-                        <a href="{{ url('admin/role') }}">
-                            <div class="nav-link-icon d-inline-flex">
-                                <i class="far fa-folder"></i>
-                            </div>
-                            Decentralization
-                        </a>
-                        <i class="arrow fas fa-angle-right"></i>
-                        <ul class="sub-menu">
-                            <li><a href="{{ url('admin/role') }}">List Roles</a></li>
-                            <li><a href="{{ url('admin/role/add') }}">Add</a></li>
-                        </ul>
-                    </li>
+                        <li class="nav-link {{ request()->is('admin/reseller*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/reseller') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Reseller
+                            </a>
+                            <i class="arrow fas fa-angle-right"></i>
+                            <ul class="sub-menu">
+                                <li class="{{ request()->is('admin/reseller') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/reseller') }}">List Resellers</a></li>
+                                @can('reseller.add')
+                                    <li class="{{ request()->is('admin/reseller/add') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/reseller/add') }}">Add</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('menu.show')
 
+                        <li class="nav-link {{ request()->is('admin/menu*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/menu') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Menu
+                            </a>
+                            <i class="arrow fas fa-angle-right"></i>
+                            <ul class="sub-menu">
+                                <li class="{{ request()->is('admin/menu') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/menu') }}">List Menu</a></li>
+                                @can('menu.add')
+                                    <li class="{{ request()->is('admin/menu/add') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/menu/add') }}">Add</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('category.show')
+
+                        <li class="nav-link {{ request()->is('admin/categories*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/categories') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Category
+                            </a>
+                            <i class="arrow fas fa-angle-right"></i>
+                            <ul class="sub-menu">
+                                <li class="{{ request()->is('admin/categories') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/categories') }}">List Categories</a></li>
+                                @can('category.add')
+                                    <li class="{{ request()->is('admin/categories/add') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/categories/add') }}">Add</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('sidebar.show')
+
+                        <li class="nav-link {{ request()->is('admin/sidebar*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/sidebar/show/subcategory') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Sidebar
+                            </a>
+                            <i class="arrow fas fa-angle-right"></i>
+                            <ul class="sub-menu">
+                                <li class="{{ request()->is('admin/sidebar/show/subcategory') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/sidebar/show/subcategory') }}">List Subcategory</a></li>
+                                @can('sidebar.add')
+                                    <li class="{{ request()->is('admin/sidebar/add/subcategory') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/sidebar/add/subcategory') }}">Add Subcategory</a></li>
+                                @endcan
+                                <li class="{{ request()->is('admin/sidebar/show/filter') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/sidebar/show/filter') }}">List Filter</a></li>
+                                @can('sidebar.add')
+                                    <li class="{{ request()->is('admin/sidebar/add/filter') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/sidebar/add/filter') }}">Add Filter</a></li>
+                                @endcan
+
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('product.show')
+                        <li class="nav-link {{ request()->is('admin/product*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/product') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Product
+                            </a>
+                            <i class="arrow fas fa-angle-right"></i>
+                            <ul class="sub-menu">
+                                <li class="{{ request()->is('admin/product') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/product') }}">List Products</a></li>
+                                @can('product.add')
+                                    <li class="{{ request()->is('admin/product/add') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/product/add') }}">Add</a></li>
+                                @endcan
+                                @can('keysearch.show')
+                                    <li class="{{ request()->is('admin/product/keysearch') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/product/keysearch') }}">Keysearches</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('user.show')
+
+                        <li class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/user') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Users
+                            </a>
+                            <i class="arrow fas fa-angle-right"></i>
+
+                            <ul class="sub-menu">
+                                <li class="{{ request()->is('admin/user') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/user') }}">List Users</a></li>
+                                @can('user.add')
+                                    <li class="{{ request()->is('admin/user/add') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/user/add') }}">Add</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
+                    @can('role.show')
+
+                        <li class="nav-link {{ request()->is('admin/role*') ? 'active' : '' }}">
+                            <a href="{{ url('admin/role') }}">
+                                <div class="nav-link-icon d-inline-flex">
+                                    <i class="far fa-folder"></i>
+                                </div>
+                                Decentralization
+                            </a>
+                            <i class="arrow fas fa-angle-right"></i>
+                            <ul class="sub-menu">
+                                <li class="{{ request()->is('admin/role') ? 'active' : '' }}"><a
+                                        href="{{ url('admin/role') }}">List Roles</a></li>
+                                @can('role.add')
+                                    <li class="{{ request()->is('admin/role/add') ? 'active' : '' }}"><a
+                                            href="{{ url('admin/role/add') }}">Add</a></li>
+                                @endcan
+                            </ul>
+                        </li>
+                    @endcan
                 </ul>
             </div>
             <div id="wp-content">

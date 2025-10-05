@@ -21,15 +21,15 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     Route::controller(AboutController::class)->prefix('/about')->group(function () {
-        Route::get('/', 'show')->name('about.show');
-        Route::get('/add', 'add')->name('about.add');
-        Route::post('/store', 'store')->name('about.store');
-        Route::get('/edit/{id}', 'edit')->name('about.edit');
-        Route::post('/update/{id}', 'update')->name('about.update');
-        Route::get('/forceDelete/{id}', 'forceDelete')->name('about.force.delete');
-        Route::get('/delete/{id}', 'delete')->name('about.delete');
-        Route::get('/restore/{id}', 'restore')->name('about.restore');
-        Route::get('/action', 'handleAction')->name('about.action');
+        Route::get('/', 'show')->name('about-us.show');
+        Route::get('/add', 'add')->name('about-us.add');
+        Route::post('/store', 'store')->name('about-us.store');
+        Route::get('/edit/{id}', 'edit')->name('about-us.edit');
+        Route::post('/update/{id}', 'update')->name('about-us.update');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('about-us.forceDelete');
+        Route::get('/delete/{id}', 'delete')->name('about-us.delete');
+        Route::get('/restore/{id}', 'restore')->name('about-us.restore');
+        Route::get('/action', 'handleAction')->name('about-us.action');
     });
     Route::controller(ResellerController::class)->prefix('/reseller')->group(function () {
         Route::get('/', 'show')->name('reseller.show');
@@ -37,7 +37,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('reseller.store');
         Route::get('/edit/{id}', 'edit')->name('reseller.edit');
         Route::post('/update/{id}', 'update')->name('reseller.update');
-        Route::get('/forceDelete/{id}', 'forceDelete')->name('reseller.force.delete');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('reseller.forceDelete');
         Route::get('/delete/{id}', 'delete')->name('reseller.delete');
         Route::get('/restore/{id}', 'restore')->name('reseller.restore');
         Route::get('/action', 'handleAction')->name('reseller.action');
@@ -48,21 +48,21 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::post('/store', 'store')->name('menu.store');
         Route::get('/edit/{id}', 'edit')->name('menu.edit');
         Route::post('/update/{id}', 'update')->name('menu.update');
-        Route::get('/forceDelete/{id}', 'forceDelete')->name('menu.force.delete');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('menu.forceDelete');
         Route::get('/delete/{id}', 'delete')->name('menu.delete');
         Route::get('/restore/{id}', 'restore')->name('menu.restore');
         Route::get('/action', 'handleAction')->name('menu.action');
     });
     Route::controller(CategoriesController::class)->prefix('/categories')->group(function () {
-        Route::get('/', 'show')->name('categories.show');
-        Route::get('/add', 'add')->name('categories.add');
-        Route::post('/store', 'store')->name('categories.store');
-        Route::get('/edit/{id}', 'edit')->name('categories.edit');
-        Route::post('/update/{id}', 'update')->name('categories.update');
-        Route::get('/forceDelete/{id}', 'forceDelete')->name('categories.force.delete');
-        Route::get('/delete/{id}', 'delete')->name('categories.delete');
-        Route::get('/restore/{id}', 'restore')->name('categories.restore');
-        Route::get('/action', 'handleAction')->name('categories.action');
+        Route::get('/', 'show')->name('category.show');
+        Route::get('/add', 'add')->name('category.add');
+        Route::post('/store', 'store')->name('category.store');
+        Route::get('/edit/{id}', 'edit')->name('category.edit');
+        Route::post('/update/{id}', 'update')->name('category.update');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('category.forceDelete');
+        Route::get('/delete/{id}', 'delete')->name('category.delete');
+        Route::get('/restore/{id}', 'restore')->name('category.restore');
+        Route::get('/action', 'handleAction')->name('category.action');
     });
     Route::controller(SidebarController::class)->prefix('/sidebar')->group(function () {
         Route::get('/show/{type}', 'show')->name('sidebar.show');
@@ -70,7 +70,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::post('/store/{type}', 'store')->name('sidebar.store');
         Route::get('/edit/{id}', 'edit')->name('sidebar.edit');
         Route::post('/update/{type}/{id}', 'update')->name('sidebar.update');
-        Route::get('/forceDelete/{id}', 'forceDelete')->name('sidebar.force.delete');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('sidebar.forceDelete');
         Route::get('/delete/{id}', 'delete')->name('sidebar.delete');
         Route::get('/restore/{id}', 'restore')->name('sidebar.restore');
         Route::get('/action', 'handleAction')->name('sidebar.action');
@@ -91,20 +91,22 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::get('/ajax', 'ajax');
         Route::get('/keysearch', 'keysearchShow')->name('keysearch.show');
         Route::get('/keysearch/delete/{id}', 'keysearchDelete')->name('keysearch.delete');
-        Route::get('/keysearch/action/', 'keysearchActions');
+        Route::get('/keysearch/action/', 'keysearch.action');
     });
     Route::controller(ContactController::class)->prefix('/contact')->group(function () {
-        Route::get('/', 'list.contacts')->name('contact.list');
+        Route::get('/', 'list_contacts')->name('contact.list');
         Route::get('/show/{id}', 'show')->name('contact.show');
         Route::get('/delete/{id}', 'delete')->name('contact.delete');
+        Route::get('/action', 'handleAction')->name('contact.action');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('contact.forceDelete');
+        Route::get('/restore/{id}', 'restore')->name('contact.restore');
     });
     Route::controller(RequestController::class)->prefix('/request')->group(function () {
         Route::get('/', 'show')->name('request.show');
-        Route::get('/add', 'add')->name('request.add');
-        Route::post('/store', 'store')->name('request.store');
-        Route::get('/edit/{id}', 'edit')->name('request.edit');
-        Route::post('/update/{id}', 'update')->name('request.update');
         Route::get('/delete/{id}', 'delete')->name('request.delete');
+        Route::get('/action', 'handleAction')->name('request.action');
+        Route::get('/forceDelete/{id}', 'forceDelete')->name('request.forceDelete');
+        Route::get('/restore/{id}', 'restore')->name('request.restore');
     });
     Route::controller(UserController::class)->prefix('/user')->group(function () {
         Route::get('/', 'show')->name('user.show');
@@ -116,6 +118,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::get('/action', 'handleAction')->name('user.action');
         Route::get('/forceDelete/{id}', 'forceDelete')->name('user.forceDelete');
         Route::get('/restore/{id}', 'restore')->name('user.restore');
+        Route::get('/profile', 'profile')->name('user.profile');
     });
     Route::controller(RoleController::class)->prefix('/role')->group(function () {
         Route::get('/', 'show')->name('role.show');

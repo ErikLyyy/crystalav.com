@@ -10,39 +10,26 @@ use Illuminate\Http\Request;
 
 use App\Models\About;
 use App\Models\Media;
+use Illuminate\Support\Facades\Gate;
 
 class AboutController extends Controller
 {
     public function show(Request $request)
     {
+        if (!Gate::allows('about-us.show')) {
+            abort(403);
+        }
         $list_about = About::orderBy('id', 'desc')->get();
         $countItem = count($list_about);
         $actions = ['delete' => 'Delete'];
         $trash = false;
         $list_trash = About::onlyTrashed()->orderBy('id', 'desc')->get();
         $status = $request->input('status');
-        $search = $request->input('search');
-        $keywords = $search ? explode(' ', trim($search)) : [];
-
-        if ($search) {
-            $list_about = About::where(function ($query) use ($keywords) {
-                foreach ($keywords as $word) {
-                    $query->where('title', 'LIKE', "%{$word}%");
-                }
-            })->orderBy('id', 'desc')->get();
-        }
         if ($status) {
             if ($status == "trash") {
                 $list_about = $list_trash;
                 $trash = true;
                 $actions = ['restore' => "Restore", 'forceDelete' => "Delete"];
-                if ($search) {
-                    $list_about = About::onlyTrashed()->where(function ($query) use ($keywords) {
-                        foreach ($keywords as $word) {
-                            $query->where('title', 'LIKE', "%{$word}%");
-                        }
-                    })->orderBy('id', 'desc')->get();
-                }
             }
         }
 
@@ -50,10 +37,16 @@ class AboutController extends Controller
     }
     public function add()
     {
+        if (!Gate::allows('about-us.add')) {
+            abort(403);
+        }
         return view('admin.about.add');
     }
     public function store(Request $request)
     {
+        if (!Gate::allows('about-us.add')) {
+            abort(403);
+        }
         $request->validate(
             [
                 'title' => ['required', 'string', 'max:255'],
@@ -91,11 +84,17 @@ class AboutController extends Controller
     }
     public function edit(Request $request, $id)
     {
+        if (!Gate::allows('about-us.edit')) {
+            abort(403);
+        }
         $about = About::withTrashed()->where('id', $id)->firstOrFail();
         return view('admin.about.edit', compact('about'));
     }
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('about-us.edit')) {
+            abort(403);
+        }
         $about = About::withTrashed()->where('id', $id)->firstOrFail();
         $request->validate(
             [
@@ -137,6 +136,9 @@ class AboutController extends Controller
     }
     public function delete($id)
     {
+        if (!Gate::allows('about-us.delete')) {
+            abort(403);
+        }
         $about = About::find($id);
         $about->delete();
         return redirect()->back()->with('success', 'Deleted successfully!');
@@ -144,6 +146,9 @@ class AboutController extends Controller
     }
     public function forceDelete($id)
     {
+        if (!Gate::allows('about-us.delete')) {
+            abort(403);
+        }
         $about = About::onlyTrashed()->where('id', $id)->firstOrFail();
         $about->forceDelete();
         return redirect()->back()->with('success', 'Deleted successfully!');
@@ -151,6 +156,9 @@ class AboutController extends Controller
     }
     public function restore($id)
     {
+        if (!Gate::allows('about-us.delete')) {
+            abort(403);
+        }
         $about = About::onlyTrashed()->where('id', $id)->firstOrFail();
         $about->restore();
         return redirect()->back()->with('success', 'Restored successfully!');
@@ -158,6 +166,9 @@ class AboutController extends Controller
     }
     public function handleAction(Request $request)
     {
+        if (!Gate::allows('about-us.delete')) {
+            abort(403);
+        }
         if ($request->has('btn_apply')) {
             $checkItem = $request->input('checkItem');
             $action = $request->input('actions');

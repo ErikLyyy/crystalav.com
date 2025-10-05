@@ -6,16 +6,6 @@
             <div class="card-header font-weight-bold d-flex justify-content-between align-items-center">
                 <h5 class="m-0 ">List about <a href="{{ url('admin/about/add') }}"
                         class="btn btn-primary text-white ml-2">Add</a></h5>
-
-                <div class="form-search form-inline">
-                    <form method="GET">
-                        @if ($trash == true)
-                            <input type="hidden" name="status" value="trash" />
-                        @endif
-                        <input type="search" name="search" class="form-control form-search" placeholder="Search">
-                        <input type="submit" name="btn_search" value="Search" class="btn btn-primary">
-                    </form>
-                </div>
             </div>
             <div class="card-body">
                 @if (session('success'))

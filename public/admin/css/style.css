@@ -88,6 +88,10 @@ ul#sidebar-menu * {
     position: relative;
 }
 
+.nav-link.active>a {
+    font-weight: 500;
+}
+
 .nav-link.active>a,
 .nav-link:hover>li>a {
     color: #0061f2;
@@ -110,6 +114,10 @@ ul#sidebar-menu * {
     border-left: 1px dashed #b8b8b8;
     margin-left: 6px;
     display: none;
+}
+
+#sidebar-menu .sub-menu li.active>a {
+    font-weight: 500;
 }
 
 #sidebar-menu .sub-menu li a {
