@@ -36,7 +36,7 @@ class MenuController extends Controller
             }
         }
         foreach ($list_menu as $menu) {
-            if ($menu->parent_id == 0) {
+            if ($menu->parent_id == 0 || $menu->layout == 6) {
                 $menu->layout = "--";
             }
         }
@@ -59,8 +59,7 @@ class MenuController extends Controller
         $request->validate(
             [
                 'title' => ['required', 'string', 'max:255'],
-                'parent_id' => ['required', 'integer'],
-                'layout' => ['required']
+                'parent_id' => ['required', 'integer']
             ],
             [
                 'integer' => 'The parent menu field is required.'
@@ -70,7 +69,7 @@ class MenuController extends Controller
         $menu = Menu::create([
             'title' => $request->input('title'),
             'desc' => $request->input('desc'),
-            'layout' => $request->input('layout'),
+            'layout' => $request->input('layout', 1),
             'parent_id' => $request->input('parent_id'),
             'slug' => Str::slug($request->input('title')),
             'user_id' => Auth::id(),
@@ -96,21 +95,30 @@ class MenuController extends Controller
         $request->validate(
             [
                 'title' => ['required', 'string', 'max:255'],
-                'parent_id' => ['required', 'integer'],
-                'layout' => ['required']
+                'parent_id' => ['required', 'integer']
             ],
             [
                 'integer' => 'The parent menu field is required.'
             ]
         );
-        $menu->update([
-            'title' => $request->input('title'),
-            'desc' => $request->input('desc'),
-            'layout' => $request->input('layout'),
-            'parent_id' => $request->input('parent_id'),
-            'slug' => Str::slug($request->input('title')),
-            'user_id' => Auth::id(),
-        ]);
+        if ($menu->layout == 6) {
+            $menu->update([
+                'title' => $request->input('title'),
+                'desc' => $request->input('desc'),
+                'parent_id' => $request->input('parent_id'),
+                'slug' => Str::slug($request->input('title')),
+                'user_id' => Auth::id(),
+            ]);
+        } else {
+            $menu->update([
+                'title' => $request->input('title'),
+                'desc' => $request->input('desc'),
+                'layout' => $request->input('layout', 1),
+                'parent_id' => $request->input('parent_id'),
+                'slug' => Str::slug($request->input('title')),
+                'user_id' => Auth::id(),
+            ]);
+        }
         return redirect('admin/menu')->with('success', 'Edited successfully!');
 
     }

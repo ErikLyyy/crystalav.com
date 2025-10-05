@@ -77,18 +77,18 @@ ol.breadcrumb.mg-t {
     margin: 0px 15px 0px 5px;
 }
 
-.swiper-slide {
+/* .swiper-slide {
     height: auto !important;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
     color: #a3a3a3 !important;
-}
+} */
 
-.swiper.mySwiper .swiper-slide {
+/* .swiper.mySwiper .swiper-slide {
     margin: auto !important;
-}
+} */
 
 .sumary {
     display: flex;

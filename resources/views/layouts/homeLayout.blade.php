@@ -18,7 +18,8 @@
     <!-- HEADER  -->
     <div id="header">
         <div id="nav-wp">
-            <a href="?page=home" id="logo"><img src="{{ asset('public/media/images/default-images/logo.png') }}"
+            <a href="{{ url('/') }}" id="logo"><img
+                    src="{{ asset('public/media/images/default-images/logo.png') }}"
                     alt="Crystal Audio Visual Services, Inc." title="Crystal Audio Visual Services, Inc." /></a>
             <div id="menu-wp">
                 <div id="info">
@@ -26,7 +27,7 @@
                 </div>
                 <div id="main-menu-wp">
                     <ul id="main-menu">
-                        <li><a href="?page=home">Home</a></li>
+                        <li><a href="{{ url('/') }}">Home</a></li>
                         <li><a href="?page=list-product">Rental Request</a></li>
                         {!! $menu !!}
                         <li><a href="?page=contact">Contact Us</a></li>

@@ -38,7 +38,7 @@
                                 <img src="{{ url('public/media/images/default-images/layout1.png') }}" alt="">
                             </label>
                             <input type="radio" name="layout" value="1" id="layout1"
-                                @if ($menu->layout == 1) checked="checked" @else checked="checked" @endif>
+                                @if ($menu->layout == 1) checked="checked" @endif>
                         </div>
                         <div class="form-group">
                             <label for="layout2">
