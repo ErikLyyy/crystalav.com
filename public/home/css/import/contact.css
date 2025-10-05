@@ -1,0 +1,62 @@
+#contact-wp {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#contact-form,
+#contact-info {
+  padding: 20px;
+  margin-bottom: 50px;
+}
+
+#contact-form {
+  width: 66.66%;
+}
+
+#contact-info {
+  width: 33.33%;
+}
+
+#contact-form h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+input.form-input-contact,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  background-color: rgb(246, 246, 246);
+}
+
+button#button-submit {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-weight: 600;
+  background-color: #fff;
+}
+
+button#button-submit:hover {
+  color: #fff;
+  background-color: #000;
+  transition: all 0.3s ease-in-out;
+}
+
+#contact-form span {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+#contact-info span {
+  display: block;
+}

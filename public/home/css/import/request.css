@@ -1,0 +1,59 @@
+.request-form {
+    padding: 50px;
+    border: 1px solid #d6d6d6;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.request-form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    font-weight: 600;
+}
+
+.request-form span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.request-form input,
+.request-form textarea,
+.request-form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d6d6d6;
+    outline: none;
+}
+
+.request-form textarea {
+    background-color: #fff;
+}
+
+.request-form button.request-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #cf1047;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    outline: none;
+}
+
+.request-form button.request-btn:hover {
+    text-decoration: underline;
+}
+
+#quote-wp.request-pg .quote {
+    width: 100%;
+    margin-top: 30px;
+}
+
+#quote-wp.request-pg .name-qty-wp {
+    justify-content: flex-start;
+}

@@ -1,0 +1,49 @@
+body {
+  font-family: "Roboto", sans-seri !important;
+}
+
+#content {
+  min-height: 70vh;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: 1440px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+ul li a {
+  color: #000;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 1440px) {
+  .container {
+    width: 1024px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    width: 768px;
+    padding: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 576px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 320px) {}

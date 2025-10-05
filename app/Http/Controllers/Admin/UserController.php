@@ -121,8 +121,10 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
             ]);
         }
-        $user = User::find($id);
-        $user->roles()->sync($request->input('role', []));
+        if (Auth::id() != 2) {
+            $user = User::find($id);
+            $user->roles()->sync($request->input('role', []));
+        }
         return redirect('admin/user')->with('status', 'Updated successfully!');
     }
     function delete(Request $request, $id)

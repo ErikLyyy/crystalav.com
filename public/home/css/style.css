@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "global.css";
+@import "import/home.css";
+@import "import/cat-pages.css";
+@import "import/swiper.css";
+@import "import/contact.css";
+@import "import/list-product.css";
+@import "import/detail-product.css";
+@import "import/quote.css";
+@import "import/request.css";
+
+/* Responsive */
+@import "import/responsive/home-responsive.css";
+@import "import/responsive/cat-pages-responsive.css";
+@import "import/responsive/contact-responsive.css";
+@import "import/responsive/list-product-responsive.css";
+@import "import/responsive/detail-product-responsive.css";
+@import "import/responsive/quote-responsive.css";
+@import "import/responsive/request-responsive.css";

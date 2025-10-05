@@ -1,0 +1,289 @@
+@media only screen and (max-width: 1440px) {
+  /* about-us */
+
+  #content-card-wp>div {
+    padding: 5px;
+  }
+
+  .content-cart-text h2 {
+    font-size: 27px;
+  }
+
+  .content-cart-text p {
+    font-size: 19px;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  /* ===============HEADER================ */
+
+  #header {
+    height: 80px;
+  }
+
+  #head-blank {
+    height: 80px;
+  }
+
+  #nav-wp {
+    position: relative;
+    padding: 15px 10px;
+  }
+
+  #logo img {
+    height: 55px;
+  }
+
+  ul#main-menu,
+  #info {
+    display: none;
+  }
+
+  ul#main-menu {
+    max-height: calc(100vh - 150px);
+    border-bottom: 1px solid #d1d1d1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #toggle-menu-wp {
+    justify-content: end;
+  }
+
+  #menu-btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-left: 10px;
+  }
+
+  #menu-btn>span {
+    display: block;
+    width: 23px;
+    height: 2px;
+    margin: 3px;
+    background-color: #6f6f6f;
+  }
+
+  #menu-btn:hover>span {
+    background-color: #000;
+    transition: all 0.3s;
+  }
+
+  #menu-btn.opened>span:first-child {
+    transform: translate(0, 4px) rotate(-45deg);
+  }
+
+  #menu-btn.opened>span:nth-child(2) {
+    display: none;
+  }
+
+  #menu-btn.opened>span:last-child {
+    transform: translate(0, -4px) rotate(45deg);
+  }
+
+  #main-menu-wp {
+    background-color: #fff;
+    flex-direction: column-reverse;
+  }
+
+  ul#main-menu.showed-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    margin-top: 0px;
+    top: 80px;
+    left: 0;
+    background-color: #fff;
+  }
+
+  ul#main-menu.showed-menu>li>a {
+    font-size: 16px;
+  }
+
+  ul#main-menu.showed-menu li:hover>a {
+    background-color: #e9ecef;
+  }
+
+  ul#main-menu.showed-menu li:focus>a {
+    background-color: #e9ecef;
+  }
+
+  ul#main-menu li>a.dropdown-toggle::after {
+    top: 10px;
+  }
+
+  ul#main-menu.showed-menu ul.sub-menu {
+    position: static;
+    width: 100%;
+    padding-left: 20px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+  }
+
+  ul.sub-menu>li>a {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  /* =============CONTENT=================== */
+
+  /* head-title */
+
+  #head-title h1 {
+    font-size: 48px;
+  }
+
+  #head-title span,
+  #head-title small {
+    font-size: 18px;
+  }
+
+  /* about-us */
+
+  h1.main-title {
+    margin: 30px 0;
+    font-size: 14px;
+  }
+
+  #content-card-wp>div {
+    width: 50%;
+  }
+
+  .content-cart-text {
+    padding: 30px;
+  }
+
+  .content-cart-text h2 {
+    font-size: 26px;
+  }
+
+  /* rental-support */
+
+  .section-content {
+    width: 50%;
+  }
+
+  .section-content h2 {
+    font-size: 24px;
+  }
+
+  .section-content p {
+    margin-bottom: 30px;
+    font-size: 17px;
+  }
+
+  .section-content a {
+    font-size: 14px;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #8f6e6e;
+  }
+
+  /* reseller  */
+
+  ul#list-reseller li {
+    width: 25%;
+    margin-bottom: 10px;
+    padding: 0 12px;
+  }
+
+  ul#list-reseller li img {
+    max-height: 50px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* head-title */
+
+  #head-title-wp {
+    padding: 150px 50px;
+  }
+
+  #head-title-wp h1 {
+    font-size: 38px;
+  }
+
+  #head-title-wp span,
+  #head-title-wp small {
+    font-size: 16px;
+  }
+
+  /* about-us */
+
+  #content-card-wp>div {
+    width: 100%;
+  }
+
+  h1.main-title {
+    margin: 20px 0;
+  }
+
+  .content-cart-text h2 {
+    font-size: 20px;
+  }
+
+  .content-cart-text p {
+    font-size: 16px;
+  }
+
+  /* rental-support */
+
+  .section-content {
+    width: 100%;
+  }
+
+  .section-content h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .section-content p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  /* reseller  */
+
+  ul#list-reseller li {
+    width: 33.33%;
+  }
+
+  #reseller-wp ul li img {
+    max-height: 40px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  /* head-title */
+
+  #head-title-wp {
+    padding: 100px 50px;
+  }
+
+  #head-title-wp h1 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  #head-title-wp span {
+    margin-bottom: 10px;
+    font-size: 12px;
+  }
+
+  #head-title-wp small {
+    font-size: 12px;
+  }
+
+  /* about-us */
+
+  .content-cart-text h2 {
+    font-size: 22px;
+  }
+}
+
+@media only screen and (max-width: 320px) {}

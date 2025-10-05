@@ -11,7 +11,7 @@ class Menu extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'title',
-        'description',
+        'desc',
         'slug',
         'layout',
         'parent_id',
