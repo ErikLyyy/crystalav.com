@@ -1,9 +1,9 @@
 @extends('layouts.homeLayout')
-@section('title', $category_parent->title)
+@section('title', $menu->title)
 
 @section('content')
     <div class="container">
-        <h1 class="main-title">{{ $category_parent->title }}</h1>
+        <h1 class="main-title">{{ $menu->title }}</h1>
         <div id="layout5">
             <div class="carousel-wp">
                 <div style="

@@ -1,17 +1,7 @@
 @if ($paginator->hasPages())
     <nav>
-        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
-            <div>
-                <p class="small text-muted">
-                    {!! __('Showing') !!}
-                    <span class="fw-semibold">{{ $paginator->firstItem() }}</span>
-                    {!! __('to') !!}
-                    <span class="fw-semibold">{{ $paginator->lastItem() }}</span>
-                    {!! __('of') !!}
-                    <span class="fw-semibold">{{ $paginator->total() }}</span>
-                    {!! __('results') !!}
-                </p>
-            </div>
+        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-center">
+
             <ul class="pagination justify-content-center">
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
@@ -26,7 +16,7 @@
                 @endphp
 
                 @for ($page = 1; $page <= $paginator->lastPage(); $page++)
-                    @if ($page == 1 || $page == $paginator->lastPage() || abs($page - $paginator->currentPage()) <= 2)
+                    @if ($page == 1 || $page == $paginator->lastPage() || abs($page - $paginator->currentPage()) <= 1)
                         <li class="page-item {{ $page == $paginator->currentPage() ? 'active' : '' }}">
                             <a class="page-link" href="{{ $paginator->url($page) }}">{{ $page }}</a>
                         </li>

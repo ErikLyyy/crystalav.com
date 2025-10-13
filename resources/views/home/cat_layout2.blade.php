@@ -1,23 +1,23 @@
 @extends('layouts.homeLayout')
-@section('title', $category_parent->title)
+@section('title', $menu->title)
 
 @section('content')
     <div class="container">
-        <h1 class="main-title">{{ $category_parent->title }}</h1>
+        <h1 class="main-title">{{ $menu->title }}</h1>
         <ul id="layout2" class="list-sub-cat">
             @foreach ($list_category as $category)
                 <li>
-                    <a href="{{ url('category/' . $category_parent->slug . '/' . $category->slug) }}" class="img-link"
+                    <a href="{{ url('category/' . $menu->slug . '/' . $category->slug) }}" class="img-link"
                         title="{{ $category->title }}">
                         <img src="{{ $category->image ? url('public/' . $category->image->file_path) : url('public/media/images/default-images/default-image.webp') }}"
                             alt="" />
                     </a>
-                    <a href="{{ url('category/' . $category_parent->slug . '/' . $category->slug) }}"
+                    <a href="{{ url('category/' . $menu->slug . '/' . $category->slug) }}"
                         class="sub-cat-title">{{ $category->title }}</a>
                 </li>
             @endforeach
         </ul>
-        @if ($category_parent->slug == 'conference-meeting')
+        @if ($menu->slug == 'conference-meeting')
             <div class="conference-ex-wp">
                 <div class="video-wp">
                     <iframe data-ux="Embed" allowfullscreen="" type="text/html" frameborder="0"

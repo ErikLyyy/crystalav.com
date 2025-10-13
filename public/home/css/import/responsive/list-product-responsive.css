@@ -125,6 +125,11 @@
         font-size: 13px;
     }
 
+    .form-s ul#search-results {
+        font-size: 13px;
+        top: 31px;
+    }
+
     .select-form {
         width: 170px;
         margin-left: 10px;

@@ -84,6 +84,8 @@ ul#main-menu li>a.dropdown-toggle::after {
     content: url("../../../media/images/default-images/arrow_down.png");
     position: absolute;
     top: 14px;
+    border: none;
+    margin-left: 0;
 }
 
 ul#main-menu li:hover>a.dropdown-toggle::after {

@@ -11,13 +11,19 @@ use App\Http\Controllers\Admin\ResellerController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SidebarController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/category/{slug}', [App\Http\Controllers\HomeController::class, 'category'])->name('category');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/category/{menu_slug}', [HomeController::class, 'category'])->name('category');
+Route::get('/category/{menu_slug}/{category_slug}', [HomeController::class, 'list_product'])->name('list_product');
+Route::get('/rental_request', [HomeController::class, 'list_product'])->name('list_product');
+Route::get('/add_cart_ajax', [HomeController::class, 'add_cart_ajax'])->name('add_cart_ajax');
+Route::get('/search/suggestions', [HomeController::class, 'suggestions'])->name('search.suggestions');
+
 Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
