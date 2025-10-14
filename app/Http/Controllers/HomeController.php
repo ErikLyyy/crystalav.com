@@ -269,4 +269,39 @@ class HomeController extends Controller
         $result = ['cartCount' => Cart::count()];
         return response()->json($result);
     }
+    public function detail_product(Request $request, $menu_slug, $category_slug, $product_slug)
+    {
+
+        $product = Product::where('slug', $product_slug)->first();
+        foreach ($product->media as $media) {
+            if ($media->media_type != "thumbnail") {
+                $product->media->file_path = $media->file_path;
+            }
+        }
+        // dd($product->media);
+
+        $relative_products = Product::whereHas('category', function ($q) use ($category_slug) {
+            $q->where('slug', $category_slug);
+        })
+            ->where('warehouse_status', 'In Stock')
+            ->where('privacy', 'Public')
+            ->where('slug', '!=', $product_slug)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        foreach ($relative_products as $relative_product) {
+            foreach ($relative_product->media as $media) {
+                if ($media->media_type == "thumbnail") {
+                    $relative_product->thumbnail = $media->file_path;
+                }
+            }
+        }
+
+        return view('home.detail_product', compact(
+            'product',
+            'relative_products',
+            'menu_slug',
+            'category_slug'
+        ));
+    }
 }

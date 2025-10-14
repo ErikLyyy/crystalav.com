@@ -20,6 +20,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/category/{menu_slug}', [HomeController::class, 'category'])->name('category');
 Route::get('/category/{menu_slug}/{category_slug}', [HomeController::class, 'list_product'])->name('list_product');
+Route::get('/category/{menu_slug}/{category_slug}/{product_slug}', [HomeController::class, 'detail_product'])->name('detail_product');
 Route::get('/rental_request', [HomeController::class, 'list_product'])->name('list_product');
 Route::get('/add_cart_ajax', [HomeController::class, 'add_cart_ajax'])->name('add_cart_ajax');
 Route::get('/search/suggestions', [HomeController::class, 'suggestions'])->name('search.suggestions');

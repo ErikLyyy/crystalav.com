@@ -84,11 +84,13 @@
                     <div class="form-group">
                         <select name="parent_id" id="" class="form-control">
                             <option>Select parent menu</option>
-                            <option value="0">Set as parent menu</option>
                             @foreach ($list_menu as $item)
+                                <option value="0" @if ($menu->parent_id == 0) selected="selected" @endif>Set as
+                                    parent menu</option>
                                 <option
                                     value="{{ $item->id }}"@if ($menu->parent_id == $item->id) selected="selected" @endif>
-                                    {{ $item->title }}</option>
+                                    {{ $item->title }}
+                                </option>
                             @endforeach
                         </select>
                     </div>

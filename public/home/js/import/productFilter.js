@@ -1,10 +1,11 @@
 $(document).ready(function () {
     function checkWindowSize() {
         if (window.matchMedia("(min-width: 768px)").matches) {
-            $("#sidebar").show();
+            $(".list-products-pg #sidebar").show();
+
         } else {
-            $("#sidebar").hide();
-            $(".oversidebar").hide();
+            $(".list-products-pg #sidebar").hide();
+            $("#oversidebar").hide();
         }
     }
     checkWindowSize();
@@ -122,7 +123,7 @@ $(document).ready(function () {
                 });
                 if (data['list_filter'] != undefined) {
                     $(".sidebar_filter").remove();
-                    $("#sidebar").append(data['list_filter']);
+                    $(".list-products-pg #sidebar").append(data['list_filter']);
                 }
             },
             error: function (xhr, ajaxOptions, thrownError) {
@@ -146,15 +147,15 @@ $(document).ready(function () {
         console.log('ok');
         e.preventDefault();
         $('#oversidebar').show()
-        $('#sidebar').show()
+        $('.list-products-pg #sidebar').show()
     })
     $('.close-btn').click(function () {
         $('#oversidebar').hide()
-        $('#sidebar').hide()
+        $('.list-products-pg #sidebar').hide()
     })
     $('#oversidebar').click(function () {
         $('#oversidebar').hide()
-        $('#sidebar').hide()
+        $('.list-products-pg #sidebar').hide()
     })
 
     //subcategory click event

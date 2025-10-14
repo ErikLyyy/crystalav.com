@@ -23,7 +23,7 @@
                     alt="Crystal Audio Visual Services, Inc." title="Crystal Audio Visual Services, Inc." /></a>
             <div id="menu-wp">
                 <div id="info">
-                    <p>Service - Support: <span>866.411.6468</span></p>
+                    <p>Service - Support: <span>866.441.6468</span></p>
                 </div>
                 <div id="main-menu-wp">
                     <ul id="main-menu">

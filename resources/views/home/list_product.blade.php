@@ -114,7 +114,8 @@
                                 <div>
                                     <a href="{{ url('category/' . $product->category->menu->slug . '/' . $product->category->slug . '/' . $product->slug) }}"
                                         title="{{ $product->name }}" class="thumb-link">
-                                        <img src="{{ asset('public/' . $product->thumbnail) }}" alt="" />
+                                        <img src="{{ $product->thumbnail ? asset('public/' . $product->thumbnail) : url('public/media/images/default-images/default-image.webp') }}"
+                                            alt="" />
                                     </a>
                                 </div>
                             </div>

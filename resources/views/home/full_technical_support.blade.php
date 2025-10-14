@@ -1,5 +1,5 @@
 @extends('layouts.homeLayout')
-@section('title', $category_parent->title)
+@section('title', $menu->title)
 
 @section('content')
     <div class="container">
