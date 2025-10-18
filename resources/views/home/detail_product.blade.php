@@ -148,12 +148,12 @@
                                         <div class="flex-column">
                                             <div class="flex-row">
                                                 @if ($media->media_type === 'thumbnail')
-                                                    <img src="{{ $media->file_path ? asset('public/' . $media->file_path) : url('public/media/images/default-images/default-image.webp') }}" alt="Product Image" />
+                                                    <img src="{{  asset('public/' . $media->file_path)  }}" alt="Product Image" />
                                                 @elseif ($media->media_type === 'image')
-                                                    <img src="{{ $media->file_path ? asset('public/' . $media->file_path) : url('public/media/images/default-images/default-image.webp') }}" alt="Product Image" />
+                                                    <img src="{{  asset('public/' . $media->file_path)  }}" alt="Product Image" />
                                                 @elseif ($media->media_type === 'video')
                                                     <video controls preload="metadata">
-                                                        <source src="{{ $media->file_path ? asset('public/' . $media->file_path) : url('public/media/images/default-images/default-image.webp') }}" type="video/mp4">
+                                                        <source src="{{  asset('public/' . $media->file_path)  }}" type="video/mp4">
                                                         Your browser does not support the video tag.
                                                     </video>
                                                 @endif

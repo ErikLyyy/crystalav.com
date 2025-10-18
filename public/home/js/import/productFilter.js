@@ -21,8 +21,6 @@ $(document).ready(function () {
             list_slug: list_slug,
             select_value: select_value,
             ajax: 1,
-            category_slug: category_slug,
-            menu_slug: menu_slug,
             page: page
         };
     }
@@ -63,7 +61,7 @@ $(document).ready(function () {
                     });
                     var div = $('<div>');
                     var a_img = $('<a>', {
-                        href: PRODUCT_BASE_URL + '/' + menu_slug + '/' + category_slug + '/' + item.slug,
+                        href: PRODUCT_BASE_URL + '/' + item.menu_slug + '/' + item.category_slug + '/' + item.slug,
                         class: "thumb-link",
                         title: item.name
                     })
@@ -74,7 +72,7 @@ $(document).ready(function () {
                         class: "name-qty-wp"
                     });
                     var a_title = $('<a>', {
-                        href: PRODUCT_BASE_URL + '/' + menu_slug + '/' + category_slug + '/' + item.slug,
+                        href: PRODUCT_BASE_URL + '/' + item.menu_slug + '/' + item.category_slug + '/' + item.slug,
                         class: "product-name",
                         text: item.name
                     })
@@ -144,7 +142,6 @@ $(document).ready(function () {
 
     // product filters click event
     $('button.filter-btn').click(function (e) {
-        console.log('ok');
         e.preventDefault();
         $('#oversidebar').show()
         $('.list-products-pg #sidebar').show()
@@ -184,7 +181,6 @@ $(document).ready(function () {
 
         var parentListCatWp = $(this).closest('.list-cat-wp');
         var filter_child = parentListCatWp.find('.form-checkbox input');
-        console.log(filter_child)
         filter_child.each(function () {
             if ($(this).is(':checked')) {
                 $(this).prop('checked', false)

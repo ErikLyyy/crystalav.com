@@ -86,10 +86,6 @@ class HomeController extends Controller
         $query = Product::where('warehouse_status', 'In Stock')
             ->where('privacy', 'Public');
 
-        if ($request->has('category_slug')) {
-            $menu_slug = $request->input('menu_slug');
-            $category_slug = $request->input('category_slug');
-        }
         if ($menu_slug != "" && $category_slug != "") {
             $menu = Menu::where('slug', $menu_slug)->firstOrFail();
             $category = Category::where('slug', $category_slug)->firstOrFail();
@@ -139,6 +135,8 @@ class HomeController extends Controller
             foreach ($product->media as $media) {
                 if ($media->media_type == "thumbnail") {
                     $product->thumbnail = $media->file_path;
+                    $product['category_slug'] = $product->category->slug;
+                    $product['menu_slug'] = $product->category->menu->slug;
                 }
             }
         }
@@ -175,8 +173,6 @@ class HomeController extends Controller
             ])->links('vendor.pagination.bootstrap-5')->render();
 
             $result = [
-                'category_slug' => $category_slug,
-                'menu_slug' => $menu_slug,
                 'list_product' => $list_product,
                 'list_filter' => $list_filter,
                 'countProduct' => $countProduct,
@@ -303,5 +299,49 @@ class HomeController extends Controller
             'menu_slug',
             'category_slug'
         ));
+    }
+    function quote(Request $request)
+    {
+        $list_product = Product::where('warehouse_status', 'In Stock')
+            ->where('privacy', 'Public')
+            ->get();
+
+        if ($request->action) {
+            if ($request->action == 'delete') {
+                $r = 0;
+                foreach (Cart::content() as $row) {
+                    if ($row->rowId == $request->rowId) {
+                        $r = 1;
+                    }
+                }
+                if ($r == 1) {
+                    Cart::remove($request->rowId);
+                    $result = [
+                        'cartCount' => Cart::count(),
+                    ];
+                    return response()->json($result);
+                } else {
+                    $result = [
+                        'cartCount' => Cart::count(),
+                    ];
+                    return response()->json($result);
+                }
+            } elseif ($request->action == "update") {
+                Cart::update($request->rowId, $request->inputValue);
+                $result = [
+                    'cartCount' => Cart::count(),
+                ];
+                return response()->json($result);
+            }
+        }
+        foreach (Cart::content() as $row) {
+            $row->options->warehouse_status = "Out of Stock";
+            foreach ($list_product as $product) {
+                if ($row->id == $product->id) {
+                    $row->options->warehouse_status = "In Stock";
+                }
+            }
+        }
+        return view('home.quote');
     }
 }

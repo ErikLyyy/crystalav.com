@@ -34,7 +34,7 @@
                     </ul>
                     <div id="toggle-menu-wp">
                         <div id="cart">
-                            <a href="?page=quote">
+                            <a href="{{ url('quote') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960"
                                     width="22px" fill="#6f6f6f">
                                     <path
