@@ -11,6 +11,11 @@
         @if (Cart::count() > 0)
             <div id="quote-wp">
                 <div class="quote">
+                    @if (session('status'))
+                        <div
+                            style="padding:10px 15px;color: #155724;background-color: #d4edda;border-color: #c3e6cb;border: 1px solid transparent;border-radius: .25rem;">
+                            {{ session('status') }}</div>
+                    @endif
                     <h2>You have <span>{{ Cart::count() }}</span> products in your quote</h2>
                     <ul class="list-products">
                         <!-- @csrf -->
@@ -19,7 +24,8 @@
                                 <div class="product-wp">
                                     <div class="product-thumb">
                                         <div>
-                                            <a href="{{ $row->options->url }}" class="thumb-link">
+                                            <a href="{{ $row->options->url }}" class="thumb-link"
+                                                title="{{ $row->name }}">
                                                 <img src="{{ asset('public/' . $row->options->thumbnail) }}"
                                                     alt="" />
                                             </a>
@@ -55,7 +61,8 @@
                 </div>
             </div>
         @else
-            <h2 style="margin: 15px 0px; text-align: center; ">You have <span style="color:brown">0</span> products in your
+            <h2 class="quote-h2" style="margin: 15px 0px; text-align: center; ">You have <span style="color:brown">0</span>
+                products in your
                 quote</h2>
         @endif
     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RequestMail;
 use App\Models\About;
 use App\Models\Category;
 use App\Models\Keysearch;
@@ -15,6 +16,7 @@ use App\Traits\RenderSidebarSubcategory;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
@@ -302,7 +304,8 @@ class HomeController extends Controller
     }
     function quote(Request $request)
     {
-        $list_product = Product::where('warehouse_status', 'In Stock')
+        $list_product = Product::withTrashed()
+            ->where('warehouse_status', 'In Stock')
             ->where('privacy', 'Public')
             ->get();
 
@@ -335,13 +338,69 @@ class HomeController extends Controller
             }
         }
         foreach (Cart::content() as $row) {
+            $check = [];
             $row->options->warehouse_status = "Out of Stock";
             foreach ($list_product as $product) {
                 if ($row->id == $product->id) {
-                    $row->options->warehouse_status = "In Stock";
+                    if ($product->deleted_at == null) {
+                        $row->options->warehouse_status = "In Stock";
+                    }
+                    $check[] = $row->rowId;
                 }
+            }
+            if (count($check) == 0) {
+                Cart::remove($row->rowId);
             }
         }
         return view('home.quote');
+    }
+    function request()
+    {
+        return view('home.request');
+    }
+    function sendRequestMail(Request $request)
+    {
+        $data = [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'company_name' => $request->company_name,
+            'phone_number' => $request->phone,
+            'email' => $request->email,
+            'approximate_date' => $request->approximate_date,
+            'approximate_return' => $request->approximate_return,
+            'messages' => $request->message,
+            'list_cart' => Cart::content()
+        ];
+        $request->validate(
+            [
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255'],
+                'approximate_date' => ['required', 'string', 'max:255'],
+                'approximate_return' => ['required', 'string', 'max:255']
+            ]
+        );
+        $request = \App\Models\Request::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'company_name' => $request->company_name,
+            'phone_number' => $request->phone,
+            'email' => $request->email,
+            'approximate_date' => $request->approximate_date,
+            'approximate_return' => $request->approximate_return,
+            'message' => $request->message
+        ]);
+        foreach (Cart::content() as $row) {
+            $request->cart()->create([
+                'name' => $row->name,
+                'qty' => $row->qty,
+                'thumbnail' => $row->options->thumbnail,
+                'url' => $row->options->url,
+                'product_id' => $row->id,
+            ]);
+        }
+        Mail::to("giacuong14042003@gmail.com")->send(new RequestMail($data, '[crystalav.com] You have a new request'));
+        Mail::to($request->email)->send(new RequestMail($data, '[crystalav.com] Thank you for your request!'));
+        return redirect('quote')->with('status', 'Sent successfully! We will contact you within a few hours.');
     }
 }

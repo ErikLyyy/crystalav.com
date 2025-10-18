@@ -25,6 +25,8 @@ Route::get('/rental_request', [HomeController::class, 'list_product'])->name('li
 Route::get('/add_cart_ajax', [HomeController::class, 'add_cart_ajax'])->name('add_cart_ajax');
 Route::get('/search/suggestions', [HomeController::class, 'suggestions'])->name('search.suggestions');
 Route::get('/quote', [HomeController::class, 'quote'])->name('quote');
+Route::get('/request', [HomeController::class, 'request'])->name('request');
+Route::post('/request/sendRequestMail', [HomeController::class, 'sendRequestMail'])->name('send_request_mail');
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
