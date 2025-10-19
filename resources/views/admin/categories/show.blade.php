@@ -121,6 +121,7 @@
                                                 </a>
                                             @endif
                                         </div>
+                                    </td>
                                     <td>{{ $category->desc }}</td>
                                     <td>{{ $menu_title[$category->id] }}</td>
                                     <td>{{ $category->user->name }}</td>

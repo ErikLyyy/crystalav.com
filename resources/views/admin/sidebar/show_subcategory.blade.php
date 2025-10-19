@@ -117,18 +117,19 @@
                                                 </a>
                                             @endif
                                         </div>
-                                        @if ($sidebar->category)
-                                    <td>{{ (isset($sidebar->category->menu->title) ? $sidebar->category->menu->title : 'None') . ' / ' . $sidebar->category->title }}
                                     </td>
-                                @else
-                                    <td>None</td>
-                            @endif
-                            <td>{{ $sidebar->user->name }}</td>
-                            <td>{{ $sidebar->created_at }}</td>
-                            @if ($trash == true)
-                                <td>{{ $sidebar->deleted_at }}</td>
-                            @endif
-                            </tr>
+                                    @if ($sidebar->category)
+                                        <td>{{ (isset($sidebar->category->menu->title) ? $sidebar->category->menu->title : 'None') . ' / ' . $sidebar->category->title }}
+                                        </td>
+                                    @else
+                                        <td>None</td>
+                                    @endif
+                                    <td>{{ $sidebar->user->name }}</td>
+                                    <td>{{ $sidebar->created_at }}</td>
+                                    @if ($trash == true)
+                                        <td>{{ $sidebar->deleted_at }}</td>
+                                    @endif
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

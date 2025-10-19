@@ -225,7 +225,7 @@
                                                 </a>
                                             @endif
                                         </div>
-                                        {{-- <td>{{ $product->layout }}</td> --}}
+                                    </td>
                                     <td>{{ $product->warehouse_status }}</td>
                                     <td>{{ $product->privacy }}</td>
                                     @if ($product->category)
@@ -234,7 +234,6 @@
                                     @else
                                         <td>None</td>
                                     @endif
-                                    {{-- <td>{{ $product->category->menu->title . '/' . $product->category->title }}</td> --}}
                                     <td>{{ $product->user->name }}</td>
                                     <td>{{ $product->created_at }}</td>
                                     @if ($trash == true)

@@ -107,6 +107,7 @@
                                                 </a>
                                             @endif
                                         </div>
+                                    </td>
                                     <td>{{ $menu->layout }}</td>
                                     <td>{{ $menu->user->name }}</td>
                                     <td>{{ $menu->created_at }}</td>

@@ -109,6 +109,7 @@
                                                 </a>
                                             @endif
                                         </div>
+                                    </td>
                                     <td>{{ $about->user->name }}</td>
                                     <td>{{ $about->created_at }}</td>
                                     @if ($trash == true)

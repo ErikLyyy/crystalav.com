@@ -109,6 +109,7 @@
                                                 </a>
                                             @endif
                                         </div>
+                                    </td>
                                     <td>{{ $reseller->user->name }}</td>
                                     <td>{{ $reseller->created_at }}</td>
                                     @if ($trash == true)

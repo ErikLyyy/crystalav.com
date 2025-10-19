@@ -116,6 +116,7 @@
                                                 </a>
                                             @endif
                                         </div>
+                                    </td>
                                     <td>{{ $sidebar->user->name }}</td>
                                     <td>{{ $sidebar->created_at }}</td>
                                     @if ($trash == true)

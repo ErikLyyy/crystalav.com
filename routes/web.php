@@ -107,8 +107,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::get('/keysearch/action/', 'keysearch.action');
     });
     Route::controller(ContactController::class)->prefix('/contact')->group(function () {
-        Route::get('/', 'list_contacts')->name('contact.list');
-        Route::get('/show/{id}', 'show')->name('contact.show');
+        Route::get('/', 'show')->name('contact.show');
+        Route::get('/read/{id}', 'read')->name('contact.read');
         Route::get('/delete/{id}', 'delete')->name('contact.delete');
         Route::get('/action', 'handleAction')->name('contact.action');
         Route::get('/forceDelete/{id}', 'forceDelete')->name('contact.forceDelete');
@@ -116,6 +116,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     });
     Route::controller(RequestController::class)->prefix('/request')->group(function () {
         Route::get('/', 'show')->name('request.show');
+        Route::get('/read/{id}', 'read')->name('request.read');
         Route::get('/delete/{id}', 'delete')->name('request.delete');
         Route::get('/action', 'handleAction')->name('request.action');
         Route::get('/forceDelete/{id}', 'forceDelete')->name('request.forceDelete');
