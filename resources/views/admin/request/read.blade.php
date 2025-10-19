@@ -1,5 +1,5 @@
 @extends('layouts.adminLayout')
-@section('title', 'Edit Request')
+@section('title', 'Request')
 @section('content')
     <style>
         h3 {
