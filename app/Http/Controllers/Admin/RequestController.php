@@ -74,6 +74,7 @@ class RequestController extends Controller
         foreach ($list_cart as $cart) {
             if ($cart->product == null) {
                 $cart->url = "";
+                $cart->alert = "This product have been deleted!";
             }
         }
         return view('admin.request.read', compact('request', 'list_cart'));

@@ -128,6 +128,9 @@
                                         <p>Qty: <strong>{{ $cart->qty }}</strong></p>
 
                                     </div>
+                                    @if (isset($cart->alert))
+                                        <p style="color:red">{{ $cart->alert }}</p>
+                                    @endif
                                 </div>
                             </div>
                         </li>
