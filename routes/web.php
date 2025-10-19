@@ -27,6 +27,8 @@ Route::get('/search/suggestions', [HomeController::class, 'suggestions'])->name(
 Route::get('/quote', [HomeController::class, 'quote'])->name('quote');
 Route::get('/request', [HomeController::class, 'request'])->name('request');
 Route::post('/request/sendRequestMail', [HomeController::class, 'sendRequestMail'])->name('send_request_mail');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact/store', [HomeController::class, 'store'])->name('contact.store');
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');

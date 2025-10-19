@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Mail\RequestMail;
 use App\Models\About;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Keysearch;
 use App\Models\Menu;
 use App\Models\Product;
@@ -399,8 +401,33 @@ class HomeController extends Controller
                 'product_id' => $row->id,
             ]);
         }
-        Mail::to("giacuong14042003@gmail.com")->send(new RequestMail($data, '[crystalav.com] You have a new request'));
+        Mail::to("giacuong14042003@gmail.com")->send(new RequestMail($data, '[crystalav.com] You have a new request!'));
         Mail::to($request->email)->send(new RequestMail($data, '[crystalav.com] Thank you for your request!'));
         return redirect('quote')->with('status', 'Sent successfully! We will contact you within a few hours.');
+    }
+
+    function contact()
+    {
+        return view('home.contact');
+    }
+    function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255',
+            'message' => ['required'],
+        ]);
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'message' => $request->message,
+        ]);
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'messages' => $request->message,
+        ];
+        Mail::to("giacuong14042003@gmail.com")->send(new ContactMail($data));
+        return redirect('contact')->with('status', 'Sent message successfully!');
     }
 }

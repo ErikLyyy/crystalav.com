@@ -30,7 +30,7 @@
                         <li><a href="{{ url('/') }}">Home</a></li>
                         <li><a href="{{ url('/rental_request') }}">Rental Request</a></li>
                         {!! $menu_navbar !!}
-                        <li><a href="?page=contact">Contact Us</a></li>
+                        <li><a href="{{ url('/contact') }}">Contact Us</a></li>
                     </ul>
                     <div id="toggle-menu-wp">
                         <div id="cart">
