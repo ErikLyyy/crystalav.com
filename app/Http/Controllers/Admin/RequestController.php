@@ -27,6 +27,9 @@ class RequestController extends Controller
         $trash = false;
         $list_trash = \App\Models\Request::onlyTrashed()
             ->orderBy('id', 'desc')
+            ->get();
+        $list_trash_all = \App\Models\Request::onlyTrashed()
+            ->orderBy('id', 'desc')
             ->paginate(20);
         $status = $request->input('status');
         $search = $request->input('search');
@@ -44,7 +47,7 @@ class RequestController extends Controller
         }
         if ($status) {
             if ($status == "trash") {
-                $list_request = $list_trash;
+                $list_request = $list_trash_all;
                 $trash = true;
                 $actions = ['restore' => "Restore", 'forceDelete' => "Delete"];
                 if ($search) {

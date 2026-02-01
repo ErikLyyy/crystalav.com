@@ -27,6 +27,9 @@ class ContactController extends Controller
         $trash = false;
         $list_trash = Contact::onlyTrashed()
             ->orderBy('id', 'desc')
+            ->get();
+        $list_trash_all = Contact::onlyTrashed()
+            ->orderBy('id', 'desc')
             ->paginate(20);
         $status = $request->input('status');
         $search = $request->input('search');
@@ -42,7 +45,7 @@ class ContactController extends Controller
         }
         if ($status) {
             if ($status == "trash") {
-                $list_contact = $list_trash;
+                $list_contact = $list_trash_all;
                 $trash = true;
                 $actions = ['restore' => "Restore", 'forceDelete' => "Delete"];
                 if ($search) {

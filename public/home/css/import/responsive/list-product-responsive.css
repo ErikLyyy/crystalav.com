@@ -189,6 +189,11 @@
         z-index: 3;
     }
 
+    #sidebar .sidebar_filter .filter input[type="checkbox"] {
+        margin-left: 10px;
+        background-color: #cf1047;
+    }
+
     .close-btn {
         display: flex;
         justify-content: flex-end;

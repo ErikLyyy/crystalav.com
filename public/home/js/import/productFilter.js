@@ -82,7 +82,7 @@ $(document).ready(function () {
                     var btn_add = $('<button>', {
                         class: "btn_add",
                         name: "add",
-                        value: item.slug,
+                        value: item.id,
                         text: "ADD"
                     })
                     var decrement = $('<button>', {
